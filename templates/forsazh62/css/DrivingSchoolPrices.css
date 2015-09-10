@@ -1,0 +1,32 @@
+.CoursesCategoryBlocks,
+.AdditionalServicesBlock {
+    padding: 0px 50px;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock {}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryName,
+.AdditionalServicesBlock .AdditionalServicesTitle {
+    text-align: center;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryDescription {
+    text-align: justify;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryPrice {}
+.CoursesCategoryBlocks table td.сours {
+    text-align: left;
+    padding-left: 7px;
+}
+.CoursesCategoryBlocks table td.theory {
+    width: 80px;
+}
+.CoursesCategoryBlocks table td.practice {
+    width: 80px;
+}
+.CoursesCategoryBlocks table td.duration {
+    width: 100px;
+}
+.CoursesCategoryBlocks table td.cost {
+    width: 120px;
+}
+.AdditionalServicesBlock table td.cost {
+    width: 200px;
+}

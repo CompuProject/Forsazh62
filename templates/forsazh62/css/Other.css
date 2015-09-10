@@ -1,0 +1,60 @@
+
+
+.FooterBlock .m_block.CopyText {
+    width: 859px;
+    float: left;
+}
+
+.FooterBlock .m_block.CopyText {
+    padding: 50px 0px 30px 0px;
+    font: 12px/16px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    font: 14px/20px "Kelly Slab", helvetica, arial, sans-serif;
+    text-align: center;
+    color: #696969;
+}
+.FooterBlock .m_block.ToTopSite {
+    width: 100px;
+    float: right;
+}
+
+.FooterBlock .m_block.ToTopSite .ToTopSite {
+    height: 50px;
+    padding: 70px 0px 30px 0px;
+}
+
+.FooterBlock .m_block.ToTopSite .ToTopSite .ToTopSiteButton  {
+    display: block;
+    margin: 0 auto;
+    height: 22px;
+    width: 65px;
+    background: transparent url('../img/toTopSite.png') top center no-repeat;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font: bold 14px/14px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    padding-top: 20px;
+    color: #7E7E7E;
+}
+.FooterBlock .m_block.ToTopSite .ToTopSite .ToTopSiteButto:hover {
+    background-position: 0px -42px;
+    color: #DFDFDF;
+}
+
+.HeadInfoBlock .m_block.HeadContacts {
+    width: 700px;
+    height: 140px;
+}
+
+.HeadInfoBlock .m_block.HeadContacts .HeadPhone,
+.HeadInfoBlock .m_block.HeadContacts .HeadMail {
+    color: #FFFFFF;
+    text-align: right;
+}
+.HeadInfoBlock .m_block.HeadContacts .HeadPhone {
+    font: 34px/40px "Kelly Slab", helvetica, arial, sans-serif;
+    padding-top: 30px;
+}
+.HeadInfoBlock .m_block.HeadContacts .HeadMail {
+    font: 20px/40px "Kelly Slab", helvetica, arial, sans-serif;
+    padding-bottom: 30px;
+}

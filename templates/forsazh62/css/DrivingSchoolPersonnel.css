@@ -1,0 +1,59 @@
+.DrivingSchoolPersonnel {
+    padding: 10px 0px 10px 20px;
+}
+.DrivingSchoolPersonnel .DrivingSchoolPersonnelTitle {
+    text-align: right;
+    padding-right: 20px;
+}
+.DrivingSchoolPersonnel .Worker {
+    width: 430px;
+    padding: 10px;
+    margin-right: 20px;
+    font: 300 13px/16px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.5);
+    height: 200px;
+    float: left;
+    background: #F8F8F8 url('../img/bg_personnel.jpg') center center no-repeat;
+}
+.DrivingSchoolPersonnel .Worker .fio {
+    font: bold 18px/24px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-align: right;
+}
+.DrivingSchoolPersonnel .Worker .postName {
+    font: bold 11px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-align: right;
+    margin-bottom: 10px;
+}
+.DrivingSchoolPersonnel .Worker .WorkerPhoto {
+    float: left;
+    width: 110px;
+}
+.DrivingSchoolPersonnel .Worker .WorkerPhoto img {
+    display: block;
+    margin: 0px auto;
+    max-width: 100px;
+    max-height: 100px;
+    border: 5px solid #fff;
+    /*box-shadow: 1px 1px 5px rgba(0,0,0,.5);*/
+}
+
+.DrivingSchoolPersonnel .Worker .WorkerData {
+    width: 310px;
+    padding-left: 10px;
+    float: left;
+}
+.DrivingSchoolPersonnel .Worker .WorkerData table.WorkerDataTable {
+    border: none;
+}
+.DrivingSchoolPersonnel .Worker .WorkerData table.WorkerDataTable td {
+    border: none;
+    padding: 2px 5px;
+}
+.DrivingSchoolPersonnel .Worker .WorkerData table.WorkerDataTable td.text {
+    text-align: right;
+}
+.DrivingSchoolPersonnel .Worker .WorkerData table.WorkerDataTable td.value {
+    text-align: left;
+    font: bold 12px/16px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+}

@@ -1,0 +1,58 @@
+.c_block.Materials {
+    font: 300 16px/26px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+}
+
+.c_block.Materials.Material {
+    padding: 25px 50px;
+}
+.c_block.Materials.MaterialsBlog {
+    padding: 25px 0px;
+}
+.c_block.Materials.MaterialsBlog .material {
+    padding: 0px 25px;
+}
+
+.c_block.Materials p {
+    text-align: justify;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+.c_block.Materials ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+.c_block.Materials ul li {
+    position: relative;
+    padding-left: 10px;
+}
+.c_block.Materials ul li:after {
+    content: '\2714';
+    position: absolute;
+    left: -15px;
+}
+
+.c_block.Materials ol {
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+
+.c_block.Materials .slogan {
+    text-align: center;
+    font: bold 30px/60px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+}
+
+
+.c_block.Materials .footnote {
+    text-align: justify;
+    font: 300 12px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    margin-bottom: 5px;
+}
+.c_block.Materials .infonote {
+    text-align: justify;
+    font: 300 12px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    padding-left: 30px;
+    margin-bottom: 20px;
+}
+        
