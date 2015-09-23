@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Сен 10 2015 г., 14:01
+-- Время создания: Сен 23 2015 г., 10:25
 -- Версия сервера: 10.0.13-MariaDB
 -- Версия PHP: 5.6.1
 
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `Components` (
 
 INSERT INTO `Components` (`alias`, `name`, `author`, `version`, `description`, `adminDir`, `admin`) VALUES
 ('Adminpanel', 'Adminpanel', 'Compu Project', '1.0', 'Панель администрирования', 'admin', 'index.php'),
+('Contacts', 'Контакты', 'Compu Project', '1.0', 'Контакты офисов', 'admin', 'index.php'),
 ('DrivingSchool', 'Автошкола', 'Compu Project', '1.0', NULL, 'admin', 'index.php'),
 ('Materials', 'Материалы сайта', 'Compu Project', '1.0', 'Компонент для размещение материалов на сайте.', 'admin', 'index.php'),
 ('Users', 'Пользователи', 'Compu Project', '1.0', 'Компонент для работы с пользователями.', 'admin', 'index.php');
@@ -125,10 +126,285 @@ INSERT INTO `ComponentsElements` (`id`, `alias`, `component`, `name`, `descripti
 (105, 'MaterialsBlog', 'Materials', 'Блог материалов', 'Выводит список материалов в виде блога. Отличается от обычного вывода списка материалов блочной структурой.', 'index.php', 'print.php', 'mobile.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (201, 'DrivingSchoolPrices', 'DrivingSchool', 'Цены автошколы', NULL, 'index.php', 'index.php', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (202, 'DrivingSchoolPersonnel', 'DrivingSchool', 'Персонал', NULL, 'index.php', 'index.php', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
+(301, 'Contacts', 'Contacts', 'Адреса офисов', NULL, 'index.php', 'index.php', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (999801, 'Accounts', 'Users', 'Аккаунт', 'Аккаунт пользователя', 'index.php', 'print.php', 'mobile.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (999802, 'AccountSettings', 'Users', 'Настройки аккаунта', 'Настройки аккаунта пользователя', 'index.php', 'print.php', 'mobile.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (999803, 'Registration', 'Users', 'Регистрация', 'Страница регистрации пользователя', 'index.php', 'print.php', 'mobile.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php'),
 (999901, 'Adminpanel', 'Adminpanel', 'Панель администрирования', 'Панель администрирвоания', 'index.php', 'print.php', 'mobile.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnits`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnits` (
+  `unit` varchar(100) NOT NULL,
+  `show` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `showOnMain` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `type` varchar(100) NOT NULL,
+  `sequence` int(5) unsigned NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `feedbackEmail` varchar(100) DEFAULT NULL,
+  `phoneText1` varchar(100) DEFAULT NULL,
+  `phone1` varchar(50) DEFAULT NULL,
+  `additional1` varchar(9) DEFAULT NULL,
+  `phoneText2` varchar(100) DEFAULT NULL,
+  `phone2` varchar(50) DEFAULT NULL,
+  `additional2` varchar(9) DEFAULT NULL,
+  `monH_s` int(2) unsigned DEFAULT NULL,
+  `monM_s` int(2) unsigned DEFAULT NULL,
+  `monH_e` int(2) unsigned DEFAULT NULL,
+  `monM_e` int(2) unsigned DEFAULT NULL,
+  `tueH_s` int(2) unsigned DEFAULT NULL,
+  `tueM_s` int(2) unsigned DEFAULT NULL,
+  `tueH_e` int(2) unsigned DEFAULT NULL,
+  `tueM_e` int(2) unsigned DEFAULT NULL,
+  `wedH_s` int(2) unsigned DEFAULT NULL,
+  `wedM_s` int(2) unsigned DEFAULT NULL,
+  `wedH_e` int(2) unsigned DEFAULT NULL,
+  `wedM_e` int(2) unsigned DEFAULT NULL,
+  `thuH_s` int(2) unsigned DEFAULT NULL,
+  `thuM_s` int(2) unsigned DEFAULT NULL,
+  `thuH_e` int(2) unsigned DEFAULT NULL,
+  `thuM_e` int(2) unsigned DEFAULT NULL,
+  `friH_s` int(2) unsigned DEFAULT NULL,
+  `friM_s` int(2) unsigned DEFAULT NULL,
+  `friH_e` int(2) unsigned DEFAULT NULL,
+  `friM_e` int(2) unsigned DEFAULT NULL,
+  `satH_s` int(2) unsigned DEFAULT NULL,
+  `satM_s` int(2) unsigned DEFAULT NULL,
+  `satH_e` int(2) unsigned DEFAULT NULL,
+  `satM_e` int(2) unsigned DEFAULT NULL,
+  `sunH_s` int(2) unsigned DEFAULT NULL,
+  `sunM_s` int(2) unsigned DEFAULT NULL,
+  `sunH_e` int(2) unsigned DEFAULT NULL,
+  `sunM_e` int(2) unsigned DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnits`
+--
+
+INSERT INTO `ContactsUnits` (`unit`, `show`, `showOnMain`, `type`, `sequence`, `email`, `feedbackEmail`, `phoneText1`, `phone1`, `additional1`, `phoneText2`, `phone2`, `additional2`, `monH_s`, `monM_s`, `monH_e`, `monM_e`, `tueH_s`, `tueM_s`, `tueH_e`, `tueM_e`, `wedH_s`, `wedM_s`, `wedH_e`, `wedM_e`, `thuH_s`, `thuM_s`, `thuH_e`, `thuM_e`, `friH_s`, `friM_s`, `friH_e`, `friM_e`, `satH_s`, `satM_s`, `satH_e`, `satM_e`, `sunH_s`, `sunM_s`, `sunH_e`, `sunM_e`) VALUES
+('dep_information_department', 1, 0, 'departments', 202, '', '', '', '', '', '', '', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('dep_responsible', 1, 0, 'departments', 201, '', '', '', '', '', '', '', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_rzn_chernovickaja_6a', 1, 0, 'drivingSchool', 2, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)511-502', '84912511502', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_rzn_international_22a', 1, 0, 'drivingSchool', 1, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)511-604', '84912511604', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_rzn_novoselov_30a', 1, 0, 'drivingSchool', 3, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)513-102', '84912512102', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_rzn_pervomajskij_prt_21', 1, 0, 'drivingSchool', 5, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)511-504', '84912511504', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_rzn_pervomajskij_prt_66', 1, 0, 'drivingSchool', 4, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)512-104', '84912512104', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('ds_shil_sovetskaja_4', 1, 0, 'drivingSchool', 6, 'info.forsazh62@gmail.com', 'info.forsazh62@gmail.com', '8(4912)511-602', '84912511602', '', '8(930)783-15-04', '89307381504', '', 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, 9, 0, 18, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnitsMaps`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnitsMaps` (
+  `unit` varchar(100) NOT NULL,
+  `map` varchar(100) NOT NULL,
+  `show` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnitsMaps`
+--
+
+INSERT INTO `ContactsUnitsMaps` (`unit`, `map`, `show`) VALUES
+('ds_rzn_chernovickaja_6a', 'rzn_chernovickaja_6a', 1),
+('ds_rzn_international_22a', 'rzn_international_22a', 1),
+('ds_rzn_novoselov_30a', 'rzn_novoselov_30a', 1),
+('ds_rzn_pervomajskij_prt_21', 'rzn_pervomajskij_prt_21', 1),
+('ds_rzn_pervomajskij_prt_66', 'rzn_pervomajskij_prt_66', 1),
+('ds_shil_sovetskaja_4', 'shil_sovetskaja_4', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnitsTypes`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnitsTypes` (
+  `type` varchar(100) NOT NULL,
+  `sequence` tinyint(1) unsigned NOT NULL,
+  `show` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnitsTypes`
+--
+
+INSERT INTO `ContactsUnitsTypes` (`type`, `sequence`, `show`) VALUES
+('departments', 2, 1),
+('drivingSchool', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnitsTypes_Lang`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnitsTypes_Lang` (
+  `type` varchar(100) NOT NULL,
+  `lang` varchar(3) NOT NULL,
+  `typeName` varchar(100) NOT NULL,
+  `topText` longtext,
+  `bottomText` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnitsTypes_Lang`
+--
+
+INSERT INTO `ContactsUnitsTypes_Lang` (`type`, `lang`, `typeName`, `topText`, `bottomText`) VALUES
+('departments', 'eng', 'Departments', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can''t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
+('departments', 'rus', 'Контакты отделов', NULL, '* При отправке почтовых сообщений, если вы затрудняетесь в выборе     получателя, либо не нашли адрес нужного Вам лица — Вы всегда можете     направить корреспонденцию на общий ящик:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
+('drivingSchool', 'eng', 'Driving school office', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can''t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
+('drivingSchool', 'rus', 'Офисы Автошколы', NULL, '* При отправке почтовых сообщений, если вы затрудняетесь в выборе     получателя, либо не нашли адрес нужного Вам лица — Вы всегда можете     направить корреспонденцию на общий ящик:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnitsWokers`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnitsWokers` (
+  `unit` varchar(100) NOT NULL,
+  `worker` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnitsWokers`
+--
+
+INSERT INTO `ContactsUnitsWokers` (`unit`, `worker`) VALUES
+('dep_information_department', 'Абстрактный Секретарь'),
+('dep_responsible', 'Борисов Алексей Владимирович'),
+('dep_responsible', 'Кузнецов Роман Владимирович');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsUnits_Lang`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsUnits_Lang` (
+  `unit` varchar(100) NOT NULL,
+  `lang` varchar(3) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `adress` varchar(200) DEFAULT NULL,
+  `postAdress` varchar(200) DEFAULT NULL,
+  `text` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsUnits_Lang`
+--
+
+INSERT INTO `ContactsUnits_Lang` (`unit`, `lang`, `name`, `adress`, `postAdress`, `text`) VALUES
+('dep_information_department', 'eng', 'Information department', NULL, NULL, NULL),
+('dep_information_department', 'rus', 'Отдел информации', NULL, NULL, NULL),
+('dep_responsible', 'eng', 'Responsible', NULL, NULL, NULL),
+('dep_responsible', 'rus', 'Ответственные', NULL, NULL, NULL),
+('ds_rzn_chernovickaja_6a', 'rus', 'Офис в Роще', 'Рязанская область,<br>\r\nг. Рязань,<br>\r\nул. Черновицкая 6a,<br>\r\n3 этаж, офис 309', NULL, NULL),
+('ds_rzn_international_22a', 'rus', 'Офис в Канищево', 'Рязанская область,<br>\r\nг. Рязань,<br>\r\nул. Интернациональная 22а, 0 этаж', NULL, 'Остановка "Муниципальный рынок". <br>\r\nАвтобусы: 17, 21, 34<br>\r\nТроллейбусы: 4, 8<br>\r\nМаршрутки: 50, 51, 58, 70, 73, 75, 90, 98<br>'),
+('ds_rzn_novoselov_30a', 'rus', 'Офис в Дашках', 'Рязанская область,<br>\r\nг. Рязань,<br>\r\nул. Новоселов 30a,<br>\r\n2 этаж', NULL, NULL),
+('ds_rzn_pervomajskij_prt_21', 'rus', 'Первомайский пр-т 21', 'Рязанская область,<br>\r\nг. Рязань,<br>\r\nПервомайский пр-т 21', NULL, NULL),
+('ds_rzn_pervomajskij_prt_66', 'rus', 'Первомайский пр-т 66', 'Рязанская область,<br>\r\nг. Рязань,<br>\r\nПервомайский пр-т 66', NULL, NULL),
+('ds_shil_sovetskaja_4', 'rus', 'пос. Шилово<br>ул. Советская 4', 'Рязанская область,<br>\r\nпоселок городского<br>\r\nтипа Шилово,<br>\r\nул. Советская 4', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsWorkers`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsWorkers` (
+  `worker` varchar(50) NOT NULL,
+  `post` varchar(50) NOT NULL,
+  `email1` varchar(50) NOT NULL,
+  `email2` varchar(50) DEFAULT NULL,
+  `phoneText1` varchar(50) DEFAULT NULL,
+  `phone1` varchar(50) DEFAULT NULL,
+  `additional1` varchar(50) DEFAULT NULL,
+  `phoneText2` varchar(50) DEFAULT NULL,
+  `phone2` varchar(50) DEFAULT NULL,
+  `additional2` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsWorkers`
+--
+
+INSERT INTO `ContactsWorkers` (`worker`, `post`, `email1`, `email2`, `phoneText1`, `phone1`, `additional1`, `phoneText2`, `phone2`, `additional2`) VALUES
+('Абстрактный Секретарь', 'Секретарь', 'info.forsazh62@gmail.com', '', '8(4912)511-504', '84912511504', '', '', '', ''),
+('Борисов Алексей Владимирович', 'Старший инструктор', 'alex634ya@mail.ru', NULL, '8(930)783-15-04', '89307381504', NULL, '8(4912)511-504', '84912511504', NULL),
+('Кузнецов Роман Владимирович', 'Генеральный Директор', 'forsazh.kuznecov.rv@mail.ru', NULL, '8(930)783-15-04', '89307381504', NULL, '8(4912)511-504', '84912511504', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsWorkersPosts`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsWorkersPosts` (
+  `post` varchar(50) NOT NULL,
+  `sequence` int(2) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsWorkersPosts`
+--
+
+INSERT INTO `ContactsWorkersPosts` (`post`, `sequence`) VALUES
+('Генеральный Директор', 1),
+('Старший инструктор', 2),
+('Секретарь', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsWorkersPosts_Lang`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsWorkersPosts_Lang` (
+  `post` varchar(50) NOT NULL,
+  `lang` varchar(3) NOT NULL,
+  `postName` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsWorkersPosts_Lang`
+--
+
+INSERT INTO `ContactsWorkersPosts_Lang` (`post`, `lang`, `postName`) VALUES
+('Генеральный Директор', 'rus', 'Генеральный Директор'),
+('Секретарь', 'rus', 'Секретарь'),
+('Старший инструктор', 'rus', 'Старший инструктор');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `ContactsWorkers_Lang`
+--
+
+CREATE TABLE IF NOT EXISTS `ContactsWorkers_Lang` (
+  `worker` varchar(50) NOT NULL,
+  `lang` varchar(3) NOT NULL,
+  `fio` varchar(50) NOT NULL,
+  `info` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `ContactsWorkers_Lang`
+--
+
+INSERT INTO `ContactsWorkers_Lang` (`worker`, `lang`, `fio`, `info`) VALUES
+('Абстрактный Секретарь', 'rus', 'Урегулирование конфликтов', ''),
+('Борисов Алексей Владимирович', 'rus', 'Борисов Алексей Владимирович', ''),
+('Кузнецов Роман Владимирович', 'rus', 'Кузнецов Роман Владимирович', '');
 
 -- --------------------------------------------------------
 
@@ -203,6 +479,7 @@ CREATE TABLE IF NOT EXISTS `HtmlModul_Lang` (
 --
 
 INSERT INTO `HtmlModul_Lang` (`htmlModul`, `lang`, `html`) VALUES
+('copy1', 'eng', '<p>Driving school "FORSAZH" reserves the right to change the information published on the site.</p>\r\n<p>Information available at this site is not a public offer.</p>\r\n<p>For more information about pricing and terms, please call us at the telephone numbers provided on the OUR CONTACTS page.</p>\r\n<p>The use of information from the site www.forsazh62.ru is prohibited without the prior permission from the Site managers.</p>\r\n'),
 ('copy1', 'rus', '<p>Автошкола «ФОРСАЖ» оставляет за собой право вносить изменения в информацию, размещенную на этом сайте.</p>\r\n<p>Информация, размещенная на сайте ни в каком виде не является публичной офертой.</p>\r\n<p>Более подробную информацию о ценах и условиях просьба узнавать по телефонам на странице Контакты.</p>\r\n<p>Использование информации с сайта www.forsazh62.ru запрещено без разрешения Администрации сайта.</p>\r\n'),
 ('HeadContacts', 'rus', '<div class="HeadPhone">8 (4912) 511 504</div>\r\n<div class="HeadMail">info.forsazh62@gmail.com</div>');
 
@@ -275,6 +552,31 @@ CREATE TABLE IF NOT EXISTS `Lang` (
 INSERT INTO `Lang` (`lang`, `langName`, `default`) VALUES
 ('eng', 'English', 0),
 ('rus', 'Русский', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Maps`
+--
+
+CREATE TABLE IF NOT EXISTS `Maps` (
+  `alias` varchar(100) NOT NULL,
+  `sid` varchar(100) NOT NULL,
+  `width` int(5) unsigned DEFAULT '560',
+  `height` int(5) unsigned DEFAULT '200'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `Maps`
+--
+
+INSERT INTO `Maps` (`alias`, `sid`, `width`, `height`) VALUES
+('rzn_chernovickaja_6a', 'fPGWPk568Add75Vy5qsbRuXCpRuxwwXm', 560, 200),
+('rzn_international_22a', 'bzmZsMdnrEQlxJk6JzcgZqk4wHACcbCO', 560, 200),
+('rzn_novoselov_30a', 'SJ2oohMwvytc5LBPfIEzGdRcNFraSwMo', 560, 200),
+('rzn_pervomajskij_prt_21', '8QIKE22Wy-uG6FoX7LqKWXlFAbGttb1b', 560, 200),
+('rzn_pervomajskij_prt_66', 'iHKUpBh7hTCsRAc5DE2WE36dFejHMtYm', 560, 200),
+('shil_sovetskaja_4', 'WcDypzOslSvTtKDtDFlZ2zymYhNk4TWO', 560, 200);
 
 -- --------------------------------------------------------
 
@@ -526,7 +828,7 @@ INSERT INTO `MenuItems` (`id`, `menu`, `url`, `target`, `sequence`) VALUES
 (104, 'MainMenu', NULL, 2, 4),
 (105, 'MainMenu', NULL, 2, 5),
 (106, 'MainMenu', NULL, 2, 6),
-(107, 'MainMenu', '#', 2, 7);
+(107, 'MainMenu', NULL, 2, 7);
 
 -- --------------------------------------------------------
 
@@ -550,7 +852,8 @@ INSERT INTO `MenuItemsPage` (`menuItem`, `page`, `postfix`) VALUES
 (103, 'documents', NULL),
 (104, 'info', NULL),
 (105, 'personnel', NULL),
-(106, 'prices', NULL);
+(106, 'prices', NULL),
+(107, 'contacts', NULL);
 
 -- --------------------------------------------------------
 
@@ -569,12 +872,19 @@ CREATE TABLE IF NOT EXISTS `MenuItems_Lang` (
 --
 
 INSERT INTO `MenuItems_Lang` (`menuItem`, `lang`, `title`) VALUES
+(101, 'eng', 'News'),
 (101, 'rus', 'Акции'),
+(102, 'eng', 'About'),
 (102, 'rus', 'О нас'),
+(103, 'eng', 'Documents'),
 (103, 'rus', 'Документы'),
+(104, 'eng', 'Information'),
 (104, 'rus', 'Информация'),
+(105, 'eng', 'Staff'),
 (105, 'rus', 'Персонал'),
+(106, 'eng', 'Prices'),
 (106, 'rus', 'Цены'),
+(107, 'eng', 'Contacts'),
 (107, 'rus', 'Контакты');
 
 -- --------------------------------------------------------
@@ -821,6 +1131,7 @@ CREATE TABLE IF NOT EXISTS `Pages` (
 INSERT INTO `Pages` (`alias`, `showTitle`, `cssClasses`, `componentElement`, `template`, `isMainPage`, `index`, `follow`, `archive`, `notModifiable`) VALUES
 ('about', 1, NULL, 101, 'forsazh62', 0, 1, 1, 1, 0),
 ('adminpanel', 1, NULL, 999901, 'adminPanel', 0, 1, 1, 1, 0),
+('contacts', 1, NULL, 301, 'forsazh62', 0, 1, 1, 1, 0),
 ('documents', 1, NULL, 101, 'forsazh62', 0, 1, 1, 1, 0),
 ('info', 1, NULL, 105, 'forsazh62', 0, 1, 1, 1, 0),
 ('news', 1, NULL, 105, 'forsazh62', 1, 1, 1, 1, 0),
@@ -847,11 +1158,19 @@ CREATE TABLE IF NOT EXISTS `Pages_Lang` (
 --
 
 INSERT INTO `Pages_Lang` (`page`, `lang`, `browserTitle`, `pageTitle`, `description`, `keywords`) VALUES
+('about', 'eng', 'Driving school "FORSAZH"', 'Driving school "FORSAZH"', NULL, NULL),
 ('about', 'rus', 'Автошкола "ФОРСАЖ"', 'Автошкола "ФОРСАЖ"', NULL, NULL),
+('contacts', 'eng', 'Addresses of our offices', 'Addresses of our offices', NULL, NULL),
+('contacts', 'rus', 'Адреса наших офисов', 'Адреса наших офисов', NULL, NULL),
+('documents', 'eng', 'Documents', 'Documents', NULL, NULL),
 ('documents', 'rus', 'Документы', 'Документы', NULL, NULL),
+('info', 'eng', 'Information', 'Information', NULL, NULL),
 ('info', 'rus', 'Информация', 'Информация', NULL, NULL),
+('news', 'eng', 'Promotions and News', 'Promotions and News', NULL, NULL),
 ('news', 'rus', 'Акции и Новости', 'Акции и Новости', NULL, NULL),
+('personnel', 'eng', 'Staff driving school', 'Staff driving school', NULL, NULL),
 ('personnel', 'rus', 'Персонал', 'Персонал', NULL, NULL),
+('prices', 'eng', 'Prices', 'Prices', NULL, NULL),
 ('prices', 'rus', 'Цены', 'Цены', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1693,6 +2012,66 @@ ALTER TABLE `ComponentsElements`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `component_UNIQUE` (`component`,`alias`), ADD UNIQUE KEY `id_UNIQUE` (`id`), ADD UNIQUE KEY `alias_UNIQUE` (`alias`,`component`);
 
 --
+-- Индексы таблицы `ContactsUnits`
+--
+ALTER TABLE `ContactsUnits`
+ ADD PRIMARY KEY (`unit`), ADD KEY `fk_ContactsUnits_1_idx` (`type`);
+
+--
+-- Индексы таблицы `ContactsUnitsMaps`
+--
+ALTER TABLE `ContactsUnitsMaps`
+ ADD PRIMARY KEY (`unit`,`map`), ADD KEY `fk_ContactsUnitsMaps_2_idx` (`map`);
+
+--
+-- Индексы таблицы `ContactsUnitsTypes`
+--
+ALTER TABLE `ContactsUnitsTypes`
+ ADD PRIMARY KEY (`type`), ADD UNIQUE KEY `unique_sequence` (`sequence`);
+
+--
+-- Индексы таблицы `ContactsUnitsTypes_Lang`
+--
+ALTER TABLE `ContactsUnitsTypes_Lang`
+ ADD PRIMARY KEY (`type`,`lang`), ADD KEY `fk_ContactsTypes_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsUnitsWokers`
+--
+ALTER TABLE `ContactsUnitsWokers`
+ ADD PRIMARY KEY (`unit`,`worker`), ADD KEY `fk_ContactsUnitsWokers_2_idx` (`worker`);
+
+--
+-- Индексы таблицы `ContactsUnits_Lang`
+--
+ALTER TABLE `ContactsUnits_Lang`
+ ADD PRIMARY KEY (`unit`,`lang`), ADD KEY `fk_ContactsUnits_lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsWorkers`
+--
+ALTER TABLE `ContactsWorkers`
+ ADD PRIMARY KEY (`worker`), ADD KEY `fk_ContactsWorkers_1_idx` (`post`);
+
+--
+-- Индексы таблицы `ContactsWorkersPosts`
+--
+ALTER TABLE `ContactsWorkersPosts`
+ ADD PRIMARY KEY (`post`), ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`);
+
+--
+-- Индексы таблицы `ContactsWorkersPosts_Lang`
+--
+ALTER TABLE `ContactsWorkersPosts_Lang`
+ ADD PRIMARY KEY (`post`,`lang`), ADD KEY `fk_ContactsWorkersPosts_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsWorkers_Lang`
+--
+ALTER TABLE `ContactsWorkers_Lang`
+ ADD PRIMARY KEY (`worker`,`lang`), ADD KEY `fk_ContactsWorkers_Lang_2_idx` (`lang`);
+
+--
 -- Индексы таблицы `CreatedModules`
 --
 ALTER TABLE `CreatedModules`
@@ -1733,6 +2112,12 @@ ALTER TABLE `Jquery`
 --
 ALTER TABLE `Lang`
  ADD PRIMARY KEY (`lang`), ADD UNIQUE KEY `lang_UNIQUE` (`lang`), ADD UNIQUE KEY `langName_UNIQUE` (`langName`);
+
+--
+-- Индексы таблицы `Maps`
+--
+ALTER TABLE `Maps`
+ ADD PRIMARY KEY (`alias`), ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
 
 --
 -- Индексы таблицы `Materials`
@@ -2198,6 +2583,60 @@ ADD CONSTRAINT `fk_ComponentsDepends_2` FOREIGN KEY (`component`) REFERENCES `Co
 --
 ALTER TABLE `ComponentsElements`
 ADD CONSTRAINT `fk_ComponentsElements_1` FOREIGN KEY (`component`) REFERENCES `Components` (`alias`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsUnits`
+--
+ALTER TABLE `ContactsUnits`
+ADD CONSTRAINT `fk_ContactsUnits_1` FOREIGN KEY (`type`) REFERENCES `ContactsUnitsTypes` (`type`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsUnitsMaps`
+--
+ALTER TABLE `ContactsUnitsMaps`
+ADD CONSTRAINT `fk_ContactsUnitsMaps_1` FOREIGN KEY (`unit`) REFERENCES `ContactsUnits` (`unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsUnitsMaps_2` FOREIGN KEY (`map`) REFERENCES `Maps` (`alias`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsUnitsTypes_Lang`
+--
+ALTER TABLE `ContactsUnitsTypes_Lang`
+ADD CONSTRAINT `fk_ContactsUnitsTypes_Lang_1` FOREIGN KEY (`type`) REFERENCES `ContactsUnitsTypes` (`type`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsUnitsypes_Lang_2` FOREIGN KEY (`lang`) REFERENCES `Lang` (`lang`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsUnitsWokers`
+--
+ALTER TABLE `ContactsUnitsWokers`
+ADD CONSTRAINT `fk_ContactsUnitsWokers_1` FOREIGN KEY (`unit`) REFERENCES `ContactsUnits` (`unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsUnitsWokers_2` FOREIGN KEY (`worker`) REFERENCES `ContactsWorkers` (`worker`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsUnits_Lang`
+--
+ALTER TABLE `ContactsUnits_Lang`
+ADD CONSTRAINT `fk_ContactsUnits_lang_1` FOREIGN KEY (`unit`) REFERENCES `ContactsUnits` (`unit`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsUnits_lang_2` FOREIGN KEY (`lang`) REFERENCES `Lang` (`lang`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsWorkers`
+--
+ALTER TABLE `ContactsWorkers`
+ADD CONSTRAINT `fk_ContactsWorkers_1` FOREIGN KEY (`post`) REFERENCES `ContactsWorkersPosts` (`post`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsWorkersPosts_Lang`
+--
+ALTER TABLE `ContactsWorkersPosts_Lang`
+ADD CONSTRAINT `fk_ContactsWorkersPosts_Lang_1` FOREIGN KEY (`post`) REFERENCES `ContactsWorkersPosts` (`post`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsWorkersPosts_Lang_2` FOREIGN KEY (`lang`) REFERENCES `Lang` (`lang`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `ContactsWorkers_Lang`
+--
+ALTER TABLE `ContactsWorkers_Lang`
+ADD CONSTRAINT `fk_ContactsWorkers_Lang_1` FOREIGN KEY (`worker`) REFERENCES `ContactsWorkers` (`worker`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_ContactsWorkers_Lang_2` FOREIGN KEY (`lang`) REFERENCES `Lang` (`lang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `CreatedModules`

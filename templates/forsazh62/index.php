@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/Materials.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/DrivingSchoolPrices.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/DrivingSchoolPersonnel.css" type="text/css" />
+    <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/ContactsUI.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/Other.css" type="text/css" />
 </head>
 <body>
@@ -51,7 +52,13 @@
                 <div class="AfterContentBlock FixWidthBlockMain"><?php $ROOT->block('AfterContentBlock');?></div>
             </div>
             <div class="MainMapWrapper">
-                <div class="MainMapBlock FixWidthBlockMain"><?php include_once './MainMap.php';?></div>
+                <?php 
+                if($ROOT->getPage() != 'contacts') { 
+                    echo '<div class="MainMapBlock FixWidthBlockMain">';
+                    include_once './MainMap.php';
+                    echo '</div>';
+                } 
+                ?>
             </div>
             <div class="BottomMainWrapper">
                 <div class="BottomMainBlock FixWidthBlockMain"><?php $ROOT->block('BottomMainBlock');?></div>
