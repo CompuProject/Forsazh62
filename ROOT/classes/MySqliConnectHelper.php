@@ -74,4 +74,8 @@ class MySqliConnectHelper {
         }
         return self::$mysqli;
     }
+    
+    public static function update() {
+        self::$object = new MySqliConnectHelper();
+    }
 }

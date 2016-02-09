@@ -1,0 +1,21 @@
+body {
+    background: #f1eee7 url('../img/ny_01.jpg') top center no-repeat;
+}
+body .RootWrapper .TopPanelWrapper {
+	background: url(../img/gar.png) top center repeat-x;
+}
+body .RootWrapper .TopPanelWrapper .TopPanelBlock .MainMenuWrapper {
+	background: rgba(0,0,0,.4);
+}
+
+.horizontal_1_lvl.MainMenu li a {
+	color: #cccccc;
+}
+
+body .HeadInfoBlock .m_block.HeadContacts .HeadPhone, .HeadInfoBlock .m_block.HeadContacts .HeadPhone,
+body .HeadInfoBlock .m_block.HeadContacts .HeadPhone, .HeadInfoBlock .m_block.HeadContacts .HeadMail {
+	color: #d10f18;
+}
+body .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock .TitleWrapper .TitleBlock h1 {
+	text-shadow: 0px 0px 10px #000000;
+}

@@ -41,7 +41,7 @@
 }
 
 .HeadInfoBlock .m_block.HeadContacts {
-    width: 700px;
+    /*width: 700px;*/
     height: 140px;
 }
 
@@ -57,4 +57,8 @@
 .HeadInfoBlock .m_block.HeadContacts .HeadMail {
     font: 20px/40px "Kelly Slab", helvetica, arial, sans-serif;
     padding-bottom: 30px;
+}
+
+.MainMenuBlock .m_block.menu {
+    float: right;
 }

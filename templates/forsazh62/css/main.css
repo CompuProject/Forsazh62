@@ -196,35 +196,35 @@
         background: url('../img/bg_light_mask.png') top center no-repeat;
     }
     .RootWrapper .TopPanelWrapper .TopPanelBlock {}
+    .RootWrapper .TopPanelWrapper .TopPanelBlock .MainMenuWrapper {
+        height: 60px;
+    }
+    .RootWrapper .TopPanelWrapper .TopPanelBlock .MainMenuWrapper .MainMenuBlock {
+        height: 18px;
+        padding: 21px 0px;
+    }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelLeftWrapper {
         float: left;
-        width: 260px;
+        width: 450px;
     }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelLeftWrapper .TopPanelLeftBlock {}
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelLeftWrapper .TopPanelLeftBlock .LogoWrapper {}
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelLeftWrapper .TopPanelLeftBlock .LogoWrapper .LogoBlock {
-        width: 255px;
+        width: 450px;
         height: 200px;
-        padding: 25px 0px;
+        /*padding: 25px 0px;*/
     }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelLeftWrapper .TopPanelLeftBlock .LogoWrapper .LogoBlock .SiteMainLogo {
-        width: 255px;
+        /*width: 255px;*/
         height: 200px;
         border: none;
         vertical-align:bottom;
     }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper {
         float: right;
-        width: 700px;
+        width: 510px;
     }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock {}
-    .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock .MainMenuWrapper {
-        height: 60px;
-    }
-    .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock .MainMenuWrapper .MainMenuBlock {
-        height: 18px;
-        padding: 21px 0px;
-    }
     .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock .HeadInfoWrapper {
         height: 140px;
     }

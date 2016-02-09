@@ -11,12 +11,16 @@
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/DrivingSchoolPersonnel.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/ContactsUI.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/Other.css" type="text/css" />
+    <!--<link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/newYear.css" type="text/css" />-->
 </head>
 <body>
     <?php $ROOT->bodyStart();?>
     <div class="RootWrapper">
         <div class="TopPanelWrapper">
             <div class="TopPanelBlock FixWidthBlockMain">
+                <div class="MainMenuWrapper">
+                    <div class="MainMenuBlock"><?php $ROOT->block('MainMenuBlock');?></div>
+                </div>
                 <div class="TopPanelLeftWrapper">
                     <div class="TopPanelLeftBlock">
                         <div class="LogoWrapper">
@@ -28,9 +32,6 @@
                 </div>
                 <div class="TopPanelRightWrapper">
                     <div class="TopPanelRightBlock">
-                        <div class="MainMenuWrapper">
-                            <div class="MainMenuBlock"><?php $ROOT->block('MainMenuBlock');?></div>
-                        </div>
                         <div class="HeadInfoWrapper">
                             <div class="HeadInfoBlock"><?php $ROOT->block('HeadInfoBlock');?></div>
                         </div>
