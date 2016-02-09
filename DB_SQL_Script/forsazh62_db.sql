@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 09 2016 г., 13:49
--- Версия сервера: 5.5.43-0ubuntu0.14.04.1
--- Версия PHP: 5.5.9-1ubuntu4.9
+-- Время создания: Фев 09 2016 г., 14:28
+-- Версия сервера: 10.0.21-MariaDB
+-- Версия PHP: 5.5.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `forsazh62_db`
@@ -28,16 +28,14 @@ USE `forsazh62_db`;
 -- Структура таблицы `Components`
 --
 
-CREATE TABLE IF NOT EXISTS `Components` (
+CREATE TABLE `Components` (
   `alias` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `author` varchar(100) NOT NULL,
   `version` varchar(100) NOT NULL,
   `description` text,
   `adminDir` varchar(200) NOT NULL,
-  `admin` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  `admin` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -58,19 +56,14 @@ INSERT INTO `Components` (`alias`, `name`, `author`, `version`, `description`, `
 -- Структура таблицы `ComponentsDepends`
 --
 
-CREATE TABLE IF NOT EXISTS `ComponentsDepends` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ComponentsDepends` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `elementType` varchar(50) NOT NULL,
   `component` varchar(50) NOT NULL,
   `depends` varchar(50) NOT NULL,
   `versionStart` varchar(100) DEFAULT NULL,
-  `versionEnd` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `depends_UNIQUE` (`depends`,`component`,`elementType`),
-  KEY `fk_ComponentsDepends_1_idx` (`elementType`),
-  KEY `fk_ComponentsDepends_2_idx` (`component`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `versionEnd` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ComponentsDepends`
@@ -87,11 +80,9 @@ INSERT INTO `ComponentsDepends` (`id`, `elementType`, `component`, `depends`, `v
 -- Структура таблицы `ComponentsDependsElementsType`
 --
 
-CREATE TABLE IF NOT EXISTS `ComponentsDependsElementsType` (
+CREATE TABLE `ComponentsDependsElementsType` (
   `elementType` varchar(50) NOT NULL,
-  `tableName` varchar(50) NOT NULL,
-  PRIMARY KEY (`elementType`),
-  UNIQUE KEY `elementType_UNIQUE` (`elementType`)
+  `tableName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -109,8 +100,8 @@ INSERT INTO `ComponentsDependsElementsType` (`elementType`, `tableName`) VALUES
 -- Структура таблицы `ComponentsElements`
 --
 
-CREATE TABLE IF NOT EXISTS `ComponentsElements` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ComponentsElements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `alias` varchar(50) NOT NULL,
   `component` varchar(50) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
@@ -121,12 +112,8 @@ CREATE TABLE IF NOT EXISTS `ComponentsElements` (
   `head` varchar(100) DEFAULT NULL,
   `bodyStart` varchar(100) DEFAULT NULL,
   `bodyEnd` varchar(100) DEFAULT NULL,
-  `admin` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `component_UNIQUE` (`component`,`alias`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`,`component`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=999902 ;
+  `admin` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ComponentsElements`
@@ -153,12 +140,12 @@ INSERT INTO `ComponentsElements` (`id`, `alias`, `component`, `name`, `descripti
 -- Структура таблицы `ContactsUnits`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnits` (
+CREATE TABLE `ContactsUnits` (
   `unit` varchar(100) NOT NULL,
-  `show` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showOnMain` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `show` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showOnMain` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `type` varchar(100) NOT NULL,
-  `sequence` int(5) unsigned NOT NULL,
+  `sequence` int(5) UNSIGNED NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `feedbackEmail` varchar(100) DEFAULT NULL,
   `phoneText1` varchar(100) DEFAULT NULL,
@@ -167,36 +154,34 @@ CREATE TABLE IF NOT EXISTS `ContactsUnits` (
   `phoneText2` varchar(100) DEFAULT NULL,
   `phone2` varchar(50) DEFAULT NULL,
   `additional2` varchar(9) DEFAULT NULL,
-  `monH_s` int(2) unsigned DEFAULT NULL,
-  `monM_s` int(2) unsigned DEFAULT NULL,
-  `monH_e` int(2) unsigned DEFAULT NULL,
-  `monM_e` int(2) unsigned DEFAULT NULL,
-  `tueH_s` int(2) unsigned DEFAULT NULL,
-  `tueM_s` int(2) unsigned DEFAULT NULL,
-  `tueH_e` int(2) unsigned DEFAULT NULL,
-  `tueM_e` int(2) unsigned DEFAULT NULL,
-  `wedH_s` int(2) unsigned DEFAULT NULL,
-  `wedM_s` int(2) unsigned DEFAULT NULL,
-  `wedH_e` int(2) unsigned DEFAULT NULL,
-  `wedM_e` int(2) unsigned DEFAULT NULL,
-  `thuH_s` int(2) unsigned DEFAULT NULL,
-  `thuM_s` int(2) unsigned DEFAULT NULL,
-  `thuH_e` int(2) unsigned DEFAULT NULL,
-  `thuM_e` int(2) unsigned DEFAULT NULL,
-  `friH_s` int(2) unsigned DEFAULT NULL,
-  `friM_s` int(2) unsigned DEFAULT NULL,
-  `friH_e` int(2) unsigned DEFAULT NULL,
-  `friM_e` int(2) unsigned DEFAULT NULL,
-  `satH_s` int(2) unsigned DEFAULT NULL,
-  `satM_s` int(2) unsigned DEFAULT NULL,
-  `satH_e` int(2) unsigned DEFAULT NULL,
-  `satM_e` int(2) unsigned DEFAULT NULL,
-  `sunH_s` int(2) unsigned DEFAULT NULL,
-  `sunM_s` int(2) unsigned DEFAULT NULL,
-  `sunH_e` int(2) unsigned DEFAULT NULL,
-  `sunM_e` int(2) unsigned DEFAULT NULL,
-  PRIMARY KEY (`unit`),
-  KEY `fk_ContactsUnits_1_idx` (`type`)
+  `monH_s` int(2) UNSIGNED DEFAULT NULL,
+  `monM_s` int(2) UNSIGNED DEFAULT NULL,
+  `monH_e` int(2) UNSIGNED DEFAULT NULL,
+  `monM_e` int(2) UNSIGNED DEFAULT NULL,
+  `tueH_s` int(2) UNSIGNED DEFAULT NULL,
+  `tueM_s` int(2) UNSIGNED DEFAULT NULL,
+  `tueH_e` int(2) UNSIGNED DEFAULT NULL,
+  `tueM_e` int(2) UNSIGNED DEFAULT NULL,
+  `wedH_s` int(2) UNSIGNED DEFAULT NULL,
+  `wedM_s` int(2) UNSIGNED DEFAULT NULL,
+  `wedH_e` int(2) UNSIGNED DEFAULT NULL,
+  `wedM_e` int(2) UNSIGNED DEFAULT NULL,
+  `thuH_s` int(2) UNSIGNED DEFAULT NULL,
+  `thuM_s` int(2) UNSIGNED DEFAULT NULL,
+  `thuH_e` int(2) UNSIGNED DEFAULT NULL,
+  `thuM_e` int(2) UNSIGNED DEFAULT NULL,
+  `friH_s` int(2) UNSIGNED DEFAULT NULL,
+  `friM_s` int(2) UNSIGNED DEFAULT NULL,
+  `friH_e` int(2) UNSIGNED DEFAULT NULL,
+  `friM_e` int(2) UNSIGNED DEFAULT NULL,
+  `satH_s` int(2) UNSIGNED DEFAULT NULL,
+  `satM_s` int(2) UNSIGNED DEFAULT NULL,
+  `satH_e` int(2) UNSIGNED DEFAULT NULL,
+  `satM_e` int(2) UNSIGNED DEFAULT NULL,
+  `sunH_s` int(2) UNSIGNED DEFAULT NULL,
+  `sunM_s` int(2) UNSIGNED DEFAULT NULL,
+  `sunH_e` int(2) UNSIGNED DEFAULT NULL,
+  `sunM_e` int(2) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -218,12 +203,10 @@ INSERT INTO `ContactsUnits` (`unit`, `show`, `showOnMain`, `type`, `sequence`, `
 -- Структура таблицы `ContactsUnitsMaps`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnitsMaps` (
+CREATE TABLE `ContactsUnitsMaps` (
   `unit` varchar(100) NOT NULL,
   `map` varchar(100) NOT NULL,
-  `show` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`unit`,`map`),
-  KEY `fk_ContactsUnitsMaps_2_idx` (`map`)
+  `show` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -243,12 +226,10 @@ INSERT INTO `ContactsUnitsMaps` (`unit`, `map`, `show`) VALUES
 -- Структура таблицы `ContactsUnitsTypes`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnitsTypes` (
+CREATE TABLE `ContactsUnitsTypes` (
   `type` varchar(100) NOT NULL,
-  `sequence` tinyint(1) unsigned NOT NULL,
-  `show` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`type`),
-  UNIQUE KEY `unique_sequence` (`sequence`)
+  `sequence` tinyint(1) UNSIGNED NOT NULL,
+  `show` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -265,14 +246,12 @@ INSERT INTO `ContactsUnitsTypes` (`type`, `sequence`, `show`) VALUES
 -- Структура таблицы `ContactsUnitsTypes_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnitsTypes_Lang` (
+CREATE TABLE `ContactsUnitsTypes_Lang` (
   `type` varchar(100) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `typeName` varchar(100) NOT NULL,
   `topText` longtext,
-  `bottomText` longtext,
-  PRIMARY KEY (`type`,`lang`),
-  KEY `fk_ContactsTypes_Lang_2_idx` (`lang`)
+  `bottomText` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -280,9 +259,9 @@ CREATE TABLE IF NOT EXISTS `ContactsUnitsTypes_Lang` (
 --
 
 INSERT INTO `ContactsUnitsTypes_Lang` (`type`, `lang`, `typeName`, `topText`, `bottomText`) VALUES
-('departments', 'eng', 'Departments', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can''t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
+('departments', 'eng', 'Departments', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can\'t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
 ('departments', 'rus', 'Контакты отделов', NULL, '* При отправке почтовых сообщений, если вы затрудняетесь в выборе     получателя, либо не нашли адрес нужного Вам лица — Вы всегда можете     направить корреспонденцию на общий ящик:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
-('drivingSchool', 'eng', 'Driving school office', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can''t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
+('drivingSchool', 'eng', 'Driving school office', NULL, '* If you want to send an e-mail, but have difficulties in choosing     the recipient, or can\'t find the address of the desired person,     you can always send a message to the general mailbox:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.'),
 ('drivingSchool', 'rus', 'Офисы Автошколы', NULL, '* При отправке почтовых сообщений, если вы затрудняетесь в выборе     получателя, либо не нашли адрес нужного Вам лица — Вы всегда можете     направить корреспонденцию на общий ящик:     <a href="mailto:info.forsazh62@gmail.com">info.forsazh62@gmail.com</a>.');
 
 -- --------------------------------------------------------
@@ -291,11 +270,9 @@ INSERT INTO `ContactsUnitsTypes_Lang` (`type`, `lang`, `typeName`, `topText`, `b
 -- Структура таблицы `ContactsUnitsWokers`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnitsWokers` (
+CREATE TABLE `ContactsUnitsWokers` (
   `unit` varchar(100) NOT NULL,
-  `worker` varchar(100) NOT NULL,
-  PRIMARY KEY (`unit`,`worker`),
-  KEY `fk_ContactsUnitsWokers_2_idx` (`worker`)
+  `worker` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -313,15 +290,13 @@ INSERT INTO `ContactsUnitsWokers` (`unit`, `worker`) VALUES
 -- Структура таблицы `ContactsUnits_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsUnits_Lang` (
+CREATE TABLE `ContactsUnits_Lang` (
   `unit` varchar(100) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `name` varchar(100) NOT NULL,
   `adress` varchar(200) DEFAULT NULL,
   `postAdress` varchar(200) DEFAULT NULL,
-  `text` longtext,
-  PRIMARY KEY (`unit`,`lang`),
-  KEY `fk_ContactsUnits_lang_2_idx` (`lang`)
+  `text` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -345,7 +320,7 @@ INSERT INTO `ContactsUnits_Lang` (`unit`, `lang`, `name`, `adress`, `postAdress`
 -- Структура таблицы `ContactsWorkers`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsWorkers` (
+CREATE TABLE `ContactsWorkers` (
   `worker` varchar(50) NOT NULL,
   `post` varchar(50) NOT NULL,
   `email1` varchar(50) NOT NULL,
@@ -355,9 +330,7 @@ CREATE TABLE IF NOT EXISTS `ContactsWorkers` (
   `additional1` varchar(50) DEFAULT NULL,
   `phoneText2` varchar(50) DEFAULT NULL,
   `phone2` varchar(50) DEFAULT NULL,
-  `additional2` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`worker`),
-  KEY `fk_ContactsWorkers_1_idx` (`post`)
+  `additional2` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -375,11 +348,9 @@ INSERT INTO `ContactsWorkers` (`worker`, `post`, `email1`, `email2`, `phoneText1
 -- Структура таблицы `ContactsWorkersPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsWorkersPosts` (
+CREATE TABLE `ContactsWorkersPosts` (
   `post` varchar(50) NOT NULL,
-  `sequence` int(2) unsigned NOT NULL,
-  PRIMARY KEY (`post`),
-  UNIQUE KEY `sequence_UNIQUE` (`sequence`)
+  `sequence` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -397,12 +368,10 @@ INSERT INTO `ContactsWorkersPosts` (`post`, `sequence`) VALUES
 -- Структура таблицы `ContactsWorkersPosts_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsWorkersPosts_Lang` (
+CREATE TABLE `ContactsWorkersPosts_Lang` (
   `post` varchar(50) NOT NULL,
   `lang` varchar(3) NOT NULL,
-  `postName` varchar(50) NOT NULL,
-  PRIMARY KEY (`post`,`lang`),
-  KEY `fk_ContactsWorkersPosts_Lang_2_idx` (`lang`)
+  `postName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -420,13 +389,11 @@ INSERT INTO `ContactsWorkersPosts_Lang` (`post`, `lang`, `postName`) VALUES
 -- Структура таблицы `ContactsWorkers_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactsWorkers_Lang` (
+CREATE TABLE `ContactsWorkers_Lang` (
   `worker` varchar(50) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `fio` varchar(50) NOT NULL,
-  `info` text,
-  PRIMARY KEY (`worker`,`lang`),
-  KEY `fk_ContactsWorkers_Lang_2_idx` (`lang`)
+  `info` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -444,13 +411,10 @@ INSERT INTO `ContactsWorkers_Lang` (`worker`, `lang`, `fio`, `info`) VALUES
 -- Структура таблицы `CreatedModules`
 --
 
-CREATE TABLE IF NOT EXISTS `CreatedModules` (
-  `id` bigint(20) unsigned NOT NULL,
+CREATE TABLE `CreatedModules` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
-  `module` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_CreatedModules_1_idx` (`module`)
+  `module` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -460,6 +424,7 @@ CREATE TABLE IF NOT EXISTS `CreatedModules` (
 INSERT INTO `CreatedModules` (`id`, `name`, `module`) VALUES
 (101, 'MainMenu', 'menu'),
 (201, 'Панель Авторизации', 'authorizationUserPanel'),
+(301, 'Онлайн заявки', 'UsersOnlineApplications'),
 (401, 'MainSlider', 'slider'),
 (801, 'На верх', 'ToTopSite'),
 (901, 'Копирайт с текстом', 'html'),
@@ -471,13 +436,12 @@ INSERT INTO `CreatedModules` (`id`, `name`, `module`) VALUES
 -- Структура таблицы `DBerrors`
 --
 
-CREATE TABLE IF NOT EXISTS `DBerrors` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `DBerrors` (
+  `id` bigint(20) NOT NULL,
   `element` varchar(200) NOT NULL,
   `sql` longtext NOT NULL,
-  `date` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -485,8 +449,8 @@ CREATE TABLE IF NOT EXISTS `DBerrors` (
 -- Структура таблицы `Feedbacks`
 --
 
-CREATE TABLE IF NOT EXISTS `Feedbacks` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Feedbacks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `fio` varchar(100) NOT NULL,
   `title` varchar(100) DEFAULT NULL,
   `text` longtext NOT NULL,
@@ -497,11 +461,8 @@ CREATE TABLE IF NOT EXISTS `Feedbacks` (
   `rating` varchar(50) NOT NULL DEFAULT '5',
   `like` int(10) NOT NULL DEFAULT '0',
   `dislike` int(10) NOT NULL DEFAULT '0',
-  `show` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_Feedbacks_1_idx` (`rating`),
-  KEY `fk_Feedbacks_2_idx` (`ip`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=161 ;
+  `show` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `Feedbacks`
@@ -648,7 +609,7 @@ INSERT INTO `Feedbacks` (`id`, `fio`, `title`, `text`, `email`, `phone`, `ip`, `
 (142, 'Ксения', NULL, 'Обучалась в офисе на Черновицкой, теоретическая часть обучения была проведена на достаточно высоком профессиональном уровне. Материал излагается в доступной, понятной форме. Преподаватель Светлана доброжелательна, всегда поддерживает морально и позволяет грамотно усвоить материал. Инструктор по вождению Андрей Бондарев профессионал своего дела!  Всем большое человеческое спасибо!', NULL, NULL, '127.0.0.1', '2015-02-12 12:10:36', 'excellent', 0, 0, 1),
 (143, 'Оля ', NULL, 'Всем советую автошколу &quot;Форсаж&quot;!!!! Огромное спасибо  педагогу Светлане и  инструктору Сергею Старожилову за знания, которые помогли мне сдать экзамены в ГАИ с первого раза!!! Я познакомилась с самыми замечательными специалистами своего дела. Здорово, что существуют такие профессионалы!', NULL, NULL, '127.0.0.1', '2015-02-13 07:23:12', 'excellent', 0, 0, 1),
 (144, 'Маруся', NULL, 'Добрый день! Хочу выразить благодарность Всей компании &quot;Форсаж&quot;начиная от администратора Елены (пл. Победы) очень подробно отвечает на все интересующие меня вопросы, не хамит, дает почитать договор, что очень важно, и подробно рассказывает о ценах, машинах, которые есть в автошколе, и хотелось бы  поблагодарить преподавателя Юрия  Храмова, за профессионализм...Больше слов писать не буду, это лишнее...   Всем спасибо', NULL, NULL, '127.0.0.1', '2015-02-16 11:15:52', 'good', 0, 0, 1),
-(145, 'Мария', NULL, 'Отличная автошкола! Преподаватель теории Светлана (на Черновицкой) все понятно и доходчиво объясняет,инструктор Сергей Старожилов научит водить грамотно всех, даже самых ''трудных'' учеников!!! Впечатления от обучения в автошколе  самые положительные!!!', NULL, NULL, '127.0.0.1', '2015-03-04 12:02:24', 'excellent', 0, 0, 1),
+(145, 'Мария', NULL, 'Отличная автошкола! Преподаватель теории Светлана (на Черновицкой) все понятно и доходчиво объясняет,инструктор Сергей Старожилов научит водить грамотно всех, даже самых \'трудных\' учеников!!! Впечатления от обучения в автошколе  самые положительные!!!', NULL, NULL, '127.0.0.1', '2015-03-04 12:02:24', 'excellent', 0, 0, 1),
 (146, 'сергей с', NULL, 'я пока только изучаю теорию, преподаватели Наташа и Светлана относятся хорошо, каждому доносят подробно, спасибо им большое, за инструкторов слышал только хорошее..особенно Сергея С', NULL, NULL, '127.0.0.1', '2015-03-18 06:53:17', 'excellent', 0, 0, 1),
 (147, 'Арут', NULL, 'Жду не дождусь экзамена в Гаи, месяц прошел а очередь никак не дойдет(', NULL, NULL, '127.0.0.1', '2015-03-20 09:58:26', 'excellent', 0, 0, 1),
 (148, 'Цымбалова Екатерина Александровна', NULL, 'Хочу выразить свою благодарность инструктору Бондареву Андрею, за то что научил меня управлять транспортным средством и справляться с нервами,за твой профессионализм и тактику преподавания,так держать!!!Спасибо что ты поверил в меня и поддержал!А еще огромное спасибо преподавателю теории Светлане на Черновицкой,Вы настоящий специалист в своём деле,благодаря Вам теоретический экзамен прошел без единой ошибки.Спасибо Вам мои учителя,Вы лучшие!', NULL, NULL, '127.0.0.1', '2015-03-03 05:32:38', 'excellent', 0, 0, 1),
@@ -671,11 +632,9 @@ INSERT INTO `Feedbacks` (`id`, `fio`, `title`, `text`, `email`, `phone`, `ip`, `
 -- Структура таблицы `FeedbacksIsComments`
 --
 
-CREATE TABLE IF NOT EXISTS `FeedbacksIsComments` (
-  `feedback` bigint(20) unsigned NOT NULL,
-  `parentFeedback` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`feedback`,`parentFeedback`),
-  KEY `fk_FeedbacksIsComments_2_idx` (`parentFeedback`)
+CREATE TABLE `FeedbacksIsComments` (
+  `feedback` bigint(20) UNSIGNED NOT NULL,
+  `parentFeedback` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -703,12 +662,10 @@ INSERT INTO `FeedbacksIsComments` (`feedback`, `parentFeedback`) VALUES
 -- Структура таблицы `FeedbacksLike`
 --
 
-CREATE TABLE IF NOT EXISTS `FeedbacksLike` (
-  `feedback` bigint(20) unsigned NOT NULL,
+CREATE TABLE `FeedbacksLike` (
+  `feedback` bigint(20) UNSIGNED NOT NULL,
   `ip` varchar(50) NOT NULL,
-  `like` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`ip`,`feedback`),
-  KEY `fk_FeedbacksLike_1_idx` (`feedback`)
+  `like` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -724,12 +681,10 @@ INSERT INTO `FeedbacksLike` (`feedback`, `ip`, `like`) VALUES
 -- Структура таблицы `FeedbacksListIP`
 --
 
-CREATE TABLE IF NOT EXISTS `FeedbacksListIP` (
+CREATE TABLE `FeedbacksListIP` (
   `ip` varchar(100) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `comment` text,
-  PRIMARY KEY (`ip`),
-  KEY `fk_FeedbacksListIP_1_idx` (`status`)
+  `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -746,7 +701,7 @@ INSERT INTO `FeedbacksListIP` (`ip`, `status`, `comment`) VALUES
 -- Структура таблицы `FeedbacksListIPStatus`
 --
 
-CREATE TABLE IF NOT EXISTS `FeedbacksListIPStatus` (
+CREATE TABLE `FeedbacksListIPStatus` (
   `status` varchar(50) NOT NULL,
   `name` varchar(45) NOT NULL,
   `description` text NOT NULL,
@@ -754,8 +709,7 @@ CREATE TABLE IF NOT EXISTS `FeedbacksListIPStatus` (
   `checkingModerator` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Необходима ли проверка модератором',
   `commentYourself` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Можно ли комментировать самого себя',
   `saveReview` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Сохранять отзыв',
-  `showReview` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Отображать отзывы',
-  PRIMARY KEY (`status`)
+  `showReview` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'Отображать отзывы'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -773,16 +727,13 @@ INSERT INTO `FeedbacksListIPStatus` (`status`, `name`, `description`, `timeLimit
 -- Структура таблицы `FeedbacksRating`
 --
 
-CREATE TABLE IF NOT EXISTS `FeedbacksRating` (
+CREATE TABLE `FeedbacksRating` (
   `id` varchar(50) NOT NULL,
   `value` int(2) NOT NULL,
   `name` varchar(50) NOT NULL,
   `calc` tinyint(1) NOT NULL DEFAULT '1',
   `forFeedbacks` tinyint(1) NOT NULL DEFAULT '0',
-  `forComments` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `value_UNIQUE` (`value`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  `forComments` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -804,11 +755,9 @@ INSERT INTO `FeedbacksRating` (`id`, `value`, `name`, `calc`, `forFeedbacks`, `f
 -- Структура таблицы `HtmlModul`
 --
 
-CREATE TABLE IF NOT EXISTS `HtmlModul` (
+CREATE TABLE `HtmlModul` (
   `name` varchar(100) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -825,13 +774,10 @@ INSERT INTO `HtmlModul` (`name`, `description`) VALUES
 -- Структура таблицы `HtmlModul_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `HtmlModul_Lang` (
+CREATE TABLE `HtmlModul_Lang` (
   `htmlModul` varchar(100) NOT NULL,
   `lang` varchar(3) NOT NULL,
-  `html` longtext NOT NULL,
-  PRIMARY KEY (`htmlModul`,`lang`),
-  KEY `fk_HtmlModul_Lang_HtmlModul_idx` (`htmlModul`),
-  KEY `fk_HtmlModul_Lang_Lang_idx` (`lang`)
+  `html` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -849,19 +795,17 @@ INSERT INTO `HtmlModul_Lang` (`htmlModul`, `lang`, `html`) VALUES
 -- Структура таблицы `JCropTypes`
 --
 
-CREATE TABLE IF NOT EXISTS `JCropTypes` (
+CREATE TABLE `JCropTypes` (
   `type` varchar(50) NOT NULL,
-  `aspectRatio` float unsigned NOT NULL DEFAULT '0',
+  `aspectRatio` float UNSIGNED NOT NULL DEFAULT '0',
   `bgColor` varchar(45) NOT NULL DEFAULT 'black',
   `bgOpacity` float NOT NULL DEFAULT '0.5',
-  `sideHandles` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `minWidth` int(10) unsigned DEFAULT NULL,
-  `minHeight` int(10) unsigned DEFAULT NULL,
-  `maxWidth` int(10) unsigned DEFAULT NULL,
-  `maxHeight` int(10) unsigned DEFAULT NULL,
-  `cssClasse` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`type`),
-  UNIQUE KEY `boxId_UNIQUE` (`type`)
+  `sideHandles` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `minWidth` int(10) UNSIGNED DEFAULT NULL,
+  `minHeight` int(10) UNSIGNED DEFAULT NULL,
+  `maxWidth` int(10) UNSIGNED DEFAULT NULL,
+  `maxHeight` int(10) UNSIGNED DEFAULT NULL,
+  `cssClasse` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -878,13 +822,10 @@ INSERT INTO `JCropTypes` (`type`, `aspectRatio`, `bgColor`, `bgOpacity`, `sideHa
 -- Структура таблицы `Jquery`
 --
 
-CREATE TABLE IF NOT EXISTS `Jquery` (
+CREATE TABLE `Jquery` (
   `fileName` varchar(100) NOT NULL,
   `version` varchar(10) NOT NULL,
-  `min` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`fileName`),
-  UNIQUE KEY `version_UNIQUE` (`version`,`min`),
-  UNIQUE KEY `fileName_UNIQUE` (`fileName`)
+  `min` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -904,13 +845,10 @@ INSERT INTO `Jquery` (`fileName`, `version`, `min`) VALUES
 -- Структура таблицы `Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `Lang` (
+CREATE TABLE `Lang` (
   `lang` varchar(3) NOT NULL,
   `langName` varchar(50) NOT NULL,
-  `default` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`lang`),
-  UNIQUE KEY `lang_UNIQUE` (`lang`),
-  UNIQUE KEY `langName_UNIQUE` (`langName`)
+  `default` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -927,13 +865,11 @@ INSERT INTO `Lang` (`lang`, `langName`, `default`) VALUES
 -- Структура таблицы `Maps`
 --
 
-CREATE TABLE IF NOT EXISTS `Maps` (
+CREATE TABLE `Maps` (
   `alias` varchar(100) NOT NULL,
   `sid` varchar(100) NOT NULL,
-  `width` int(5) unsigned DEFAULT '560',
-  `height` int(5) unsigned DEFAULT '200',
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `width` int(5) UNSIGNED DEFAULT '560',
+  `height` int(5) UNSIGNED DEFAULT '200'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -954,15 +890,13 @@ INSERT INTO `Maps` (`alias`, `sid`, `width`, `height`) VALUES
 -- Структура таблицы `Materials`
 --
 
-CREATE TABLE IF NOT EXISTS `Materials` (
+CREATE TABLE `Materials` (
   `alias` varchar(200) NOT NULL,
   `created` datetime NOT NULL,
   `lastChange` datetime NOT NULL,
-  `showTitle` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showCreated` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showChange` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `showTitle` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showCreated` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showChange` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -988,12 +922,10 @@ INSERT INTO `Materials` (`alias`, `created`, `lastChange`, `showTitle`, `showCre
 -- Структура таблицы `MaterialsCategories`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsCategories` (
+CREATE TABLE `MaterialsCategories` (
   `alias` varchar(200) NOT NULL,
   `created` datetime NOT NULL,
-  `lastChange` datetime NOT NULL,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `lastChange` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1012,14 +944,10 @@ INSERT INTO `MaterialsCategories` (`alias`, `created`, `lastChange`) VALUES
 -- Структура таблицы `MaterialsCategoriesInList`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsCategoriesInList` (
+CREATE TABLE `MaterialsCategoriesInList` (
   `category` varchar(200) NOT NULL,
   `list` varchar(200) NOT NULL,
-  `sequence` int(5) unsigned NOT NULL,
-  PRIMARY KEY (`category`,`list`),
-  UNIQUE KEY `key_UNIQUE` (`sequence`,`list`),
-  KEY `fk_MaterialsCategories_has_CategoriesList_CategoriesList1_idx` (`list`),
-  KEY `fk_MaterialsCategories_has_CategoriesList_MaterialsCategori_idx` (`category`)
+  `sequence` int(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1038,20 +966,18 @@ INSERT INTO `MaterialsCategoriesInList` (`category`, `list`, `sequence`) VALUES
 -- Структура таблицы `MaterialsCategoriesList`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsCategoriesList` (
+CREATE TABLE `MaterialsCategoriesList` (
   `name` varchar(200) NOT NULL,
-  `showFullMaterialsText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `showShortMaterialsText` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showCategories` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showCreated` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showChange` tinyint(1) unsigned zerofill NOT NULL DEFAULT '1',
-  `categorialsAsURL` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `titleAsURL` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `showAllOnPage` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `onPage` int(2) unsigned NOT NULL DEFAULT '10',
-  `maxPages` int(2) unsigned NOT NULL DEFAULT '6',
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  `showFullMaterialsText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `showShortMaterialsText` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showCategories` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showCreated` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showChange` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT '1',
+  `categorialsAsURL` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `titleAsURL` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `showAllOnPage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `onPage` int(2) UNSIGNED NOT NULL DEFAULT '10',
+  `maxPages` int(2) UNSIGNED NOT NULL DEFAULT '6'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1070,14 +996,11 @@ INSERT INTO `MaterialsCategoriesList` (`name`, `showFullMaterialsText`, `showSho
 -- Структура таблицы `MaterialsCategoriesList_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsCategoriesList_Lang` (
+CREATE TABLE `MaterialsCategoriesList_Lang` (
   `list` varchar(200) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `name` varchar(200) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`list`,`lang`),
-  KEY `fk_MaterialsCategoriesList_Lang_MaterialsCategories_idx` (`list`),
-  KEY `fk_MaterialsCategoriesList_Lang_Lang_idx` (`lang`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1095,14 +1018,11 @@ INSERT INTO `MaterialsCategoriesList_Lang` (`list`, `lang`, `name`, `description
 -- Структура таблицы `MaterialsCategories_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsCategories_Lang` (
+CREATE TABLE `MaterialsCategories_Lang` (
   `category` varchar(200) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `name` varchar(200) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`category`,`lang`),
-  KEY `fk_MaterialsCategories_Lang_MaterialsCategories_idx` (`category`),
-  KEY `fk_MaterialsCategories_Lang_Lang_idx` (`lang`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1121,12 +1041,9 @@ INSERT INTO `MaterialsCategories_Lang` (`category`, `lang`, `name`, `description
 -- Структура таблицы `MaterialsInCategories`
 --
 
-CREATE TABLE IF NOT EXISTS `MaterialsInCategories` (
+CREATE TABLE `MaterialsInCategories` (
   `material` varchar(200) NOT NULL,
-  `category` varchar(200) NOT NULL,
-  PRIMARY KEY (`material`,`category`),
-  KEY `fk_MaterialsInCategories_Materials_idx` (`material`),
-  KEY `fk_MaterialsInCategories_MaterialsCategories_idx` (`category`)
+  `category` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1152,14 +1069,11 @@ INSERT INTO `MaterialsInCategories` (`material`, `category`) VALUES
 -- Структура таблицы `Materials_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `Materials_Lang` (
+CREATE TABLE `Materials_Lang` (
   `material` varchar(200) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `text` longtext NOT NULL,
-  PRIMARY KEY (`material`,`lang`),
-  KEY `fk_Materials_Lang_Materials_idx` (`material`),
-  KEY `fk_Materials_Lang_Lang_idx` (`lang`)
+  `text` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1185,14 +1099,11 @@ INSERT INTO `Materials_Lang` (`material`, `lang`, `title`, `text`) VALUES
 -- Структура таблицы `Menu`
 --
 
-CREATE TABLE IF NOT EXISTS `Menu` (
+CREATE TABLE `Menu` (
   `name` varchar(100) NOT NULL COMMENT 'Название меню',
   `description` text COMMENT 'описание',
   `type` varchar(50) NOT NULL COMMENT 'тип меню',
-  `cssClass` varchar(200) DEFAULT NULL COMMENT 'ункиальный стиль меню',
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `name_UNIQUE` (`name`),
-  KEY `fk_Menu_MenuTypes` (`type`)
+  `cssClass` varchar(200) DEFAULT NULL COMMENT 'ункиальный стиль меню'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1209,13 +1120,9 @@ INSERT INTO `Menu` (`name`, `description`, `type`, `cssClass`) VALUES
 -- Структура таблицы `MenuItemParent`
 --
 
-CREATE TABLE IF NOT EXISTS `MenuItemParent` (
-  `menuItem` bigint(20) unsigned NOT NULL COMMENT 'Элемент меню',
-  `parent` bigint(20) unsigned NOT NULL COMMENT 'Родитель элемента меню',
-  PRIMARY KEY (`menuItem`,`parent`),
-  UNIQUE KEY `menuItem_UNIQUE` (`menuItem`),
-  KEY `fk_MenuItemParent_MenuItems1` (`menuItem`),
-  KEY `fk_MenuItemParent_MenuItems2` (`parent`)
+CREATE TABLE `MenuItemParent` (
+  `menuItem` bigint(20) UNSIGNED NOT NULL COMMENT 'Элемент меню',
+  `parent` bigint(20) UNSIGNED NOT NULL COMMENT 'Родитель элемента меню'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Таблица родственных связей элементов меню.';
 
 -- --------------------------------------------------------
@@ -1224,18 +1131,13 @@ CREATE TABLE IF NOT EXISTS `MenuItemParent` (
 -- Структура таблицы `MenuItems`
 --
 
-CREATE TABLE IF NOT EXISTS `MenuItems` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор элемента меню',
+CREATE TABLE `MenuItems` (
+  `id` bigint(20) UNSIGNED NOT NULL COMMENT 'Идентификатор элемента меню',
   `menu` varchar(100) NOT NULL COMMENT 'идентификатор меню',
   `url` text COMMENT 'ссылка которую можно указать вместо идентификатора страницы. Если указана URL то ее приоритет будет выше чем у id страницы',
-  `target` int(1) unsigned NOT NULL COMMENT 'как открывать ссылку',
-  `sequence` int(5) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `key_UNIQUE` (`sequence`,`menu`),
-  KEY `fk_MenuItems_UrlTarget` (`target`),
-  KEY `fk_MenuElements_Menu` (`menu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=109 ;
+  `target` int(1) UNSIGNED NOT NULL COMMENT 'как открывать ссылку',
+  `sequence` int(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `MenuItems`
@@ -1257,14 +1159,10 @@ INSERT INTO `MenuItems` (`id`, `menu`, `url`, `target`, `sequence`) VALUES
 -- Структура таблицы `MenuItemsPage`
 --
 
-CREATE TABLE IF NOT EXISTS `MenuItemsPage` (
-  `menuItem` bigint(20) unsigned NOT NULL,
+CREATE TABLE `MenuItemsPage` (
+  `menuItem` bigint(20) UNSIGNED NOT NULL,
   `page` varchar(50) NOT NULL,
-  `postfix` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`menuItem`,`page`),
-  UNIQUE KEY `menuItem_UNIQUE` (`menuItem`),
-  KEY `fk_MenuItemsPage_MenuItems` (`menuItem`),
-  KEY `fk_MenuItemsPage_Pages` (`page`)
+  `postfix` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1287,13 +1185,10 @@ INSERT INTO `MenuItemsPage` (`menuItem`, `page`, `postfix`) VALUES
 -- Структура таблицы `MenuItems_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `MenuItems_Lang` (
-  `menuItem` bigint(20) unsigned NOT NULL,
+CREATE TABLE `MenuItems_Lang` (
+  `menuItem` bigint(20) UNSIGNED NOT NULL,
   `lang` varchar(3) NOT NULL,
-  `title` varchar(45) NOT NULL,
-  PRIMARY KEY (`menuItem`,`lang`),
-  KEY `fk_MenuItems_Lang_MenuItems` (`menuItem`),
-  KEY `fk_MenuItems_Lang_Lang` (`lang`)
+  `title` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1323,12 +1218,10 @@ INSERT INTO `MenuItems_Lang` (`menuItem`, `lang`, `title`) VALUES
 -- Структура таблицы `MenuTypes`
 --
 
-CREATE TABLE IF NOT EXISTS `MenuTypes` (
+CREATE TABLE `MenuTypes` (
   `type` varchar(50) NOT NULL,
   `description` text,
-  `default` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`type`),
-  UNIQUE KEY `type_UNIQUE` (`type`)
+  `default` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Типы меню:\nВертикальный\nГоризонтальный\nКарусель\nСлайдер';
 
 --
@@ -1345,7 +1238,7 @@ INSERT INTO `MenuTypes` (`type`, `description`, `default`) VALUES
 -- Структура таблицы `Modules`
 --
 
-CREATE TABLE IF NOT EXISTS `Modules` (
+CREATE TABLE `Modules` (
   `alias` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `author` varchar(100) NOT NULL,
@@ -1356,11 +1249,9 @@ CREATE TABLE IF NOT EXISTS `Modules` (
   `bodyStart` varchar(100) DEFAULT NULL,
   `bodyEnd` varchar(100) DEFAULT NULL,
   `admin` varchar(100) DEFAULT NULL,
-  `includeOnceHead` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `includeOnceBodyStart` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `includeOnceBodyEnd` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  `includeOnceHead` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `includeOnceBodyStart` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `includeOnceBodyEnd` tinyint(1) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1374,7 +1265,8 @@ INSERT INTO `Modules` (`alias`, `name`, `author`, `version`, `description`, `mai
 ('menu', 'Модуль меню', 'Compu Project', '1.0', 'Модуль для создания меню сайта.', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'admin/index.php', 1, 1, 1),
 ('slider', 'Слайдер', 'Compu Project', '1.0', 'Модуль для вывода слайдеров', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'admin/index.php', 1, 1, 1),
 ('socialPanel', 'social panel', 'CompuProject', '1.0', 'социальные сети', 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'admin/index.php', 1, 1, 1),
-('ToTopSite', 'ToTopSite', 'Compu Project', '1.0', NULL, 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', '/admin/index.php', 1, 1, 1);
+('ToTopSite', 'ToTopSite', 'Compu Project', '1.0', NULL, 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', '/admin/index.php', 1, 1, 1),
+('UsersOnlineApplications', 'Онлайн заявки', 'Compuproject', '1.0', NULL, 'index.php', 'head.php', 'bodyStart.php', 'bodyEnd.php', 'index.php', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1382,19 +1274,14 @@ INSERT INTO `Modules` (`alias`, `name`, `author`, `version`, `description`, `mai
 -- Структура таблицы `ModulesDepends`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesDepends` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ModulesDepends` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `elementType` varchar(50) NOT NULL,
   `module` varchar(50) NOT NULL,
   `depends` varchar(50) NOT NULL,
   `versionStart` varchar(100) DEFAULT NULL,
-  `versionEnd` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `depends_UNIQUE` (`depends`,`module`,`elementType`),
-  KEY `fk_ModulesDepends_1_idx` (`elementType`),
-  KEY `fk_ModulesDepends_2` (`module`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `versionEnd` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1402,12 +1289,9 @@ CREATE TABLE IF NOT EXISTS `ModulesDepends` (
 -- Структура таблицы `ModulesDependsElementsType`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesDependsElementsType` (
+CREATE TABLE `ModulesDependsElementsType` (
   `elementType` varchar(50) NOT NULL,
-  `tableName` varchar(50) NOT NULL,
-  PRIMARY KEY (`elementType`),
-  UNIQUE KEY `tableName_UNIQUE` (`tableName`),
-  UNIQUE KEY `elementType_UNIQUE` (`elementType`)
+  `tableName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1425,20 +1309,16 @@ INSERT INTO `ModulesDependsElementsType` (`elementType`, `tableName`) VALUES
 -- Структура таблицы `ModulesInBlocks`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesInBlocks` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `module` bigint(20) unsigned NOT NULL,
-  `block` bigint(20) unsigned NOT NULL,
-  `sequence` int(10) unsigned NOT NULL,
-  `showTitle` tinyint(1) unsigned NOT NULL DEFAULT '0',
+CREATE TABLE `ModulesInBlocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `module` bigint(20) UNSIGNED NOT NULL,
+  `block` bigint(20) UNSIGNED NOT NULL,
+  `sequence` int(10) UNSIGNED NOT NULL,
+  `showTitle` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `cssClasses` varchar(200) DEFAULT NULL,
-  `display` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `onAllPages` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `module_UNIQUE` (`module`,`block`),
-  UNIQUE KEY `sequence_UNIQUE` (`sequence`,`block`),
-  KEY `fk_ModulesInBlocks_2_idx` (`block`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=902103 ;
+  `display` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `onAllPages` tinyint(3) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ModulesInBlocks`
@@ -1447,6 +1327,7 @@ CREATE TABLE IF NOT EXISTS `ModulesInBlocks` (
 INSERT INTO `ModulesInBlocks` (`id`, `module`, `block`, `sequence`, `showTitle`, `cssClasses`, `display`, `onAllPages`) VALUES
 (101101, 101, 101, 1, 0, NULL, 1, 1),
 (201901, 201, 901, 1, 0, NULL, 1, 1),
+(301102, 301, 102, 2, 0, NULL, 1, 1),
 (401103, 401, 103, 1, 0, NULL, 1, 1),
 (801901, 801, 107, 999, 0, NULL, 1, 1),
 (901107, 901, 107, 1, 0, 'CopyText', 1, 1),
@@ -1458,12 +1339,10 @@ INSERT INTO `ModulesInBlocks` (`id`, `module`, `block`, `sequence`, `showTitle`,
 -- Структура таблицы `ModulesInBlocks_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesInBlocks_Lang` (
-  `module` bigint(20) unsigned NOT NULL,
+CREATE TABLE `ModulesInBlocks_Lang` (
+  `module` bigint(20) UNSIGNED NOT NULL,
   `lang` varchar(3) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  PRIMARY KEY (`module`,`lang`),
-  KEY `fk_ModulesInBlocks_Lang_2_idx` (`lang`)
+  `title` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1472,12 +1351,9 @@ CREATE TABLE IF NOT EXISTS `ModulesInBlocks_Lang` (
 -- Структура таблицы `ModulesOnPages`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesOnPages` (
-  `module` bigint(20) unsigned NOT NULL,
-  `page` varchar(50) NOT NULL,
-  PRIMARY KEY (`module`,`page`),
-  KEY `fk_ModulesOnPages_2_idx` (`page`),
-  KEY `fk_ModulesOnPages_1_idx` (`module`)
+CREATE TABLE `ModulesOnPages` (
+  `module` bigint(20) UNSIGNED NOT NULL,
+  `page` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1493,11 +1369,10 @@ INSERT INTO `ModulesOnPages` (`module`, `page`) VALUES
 -- Структура таблицы `ModulesParam`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesParam` (
-  `module` bigint(20) unsigned NOT NULL,
+CREATE TABLE `ModulesParam` (
+  `module` bigint(20) UNSIGNED NOT NULL,
   `param` varchar(100) NOT NULL,
-  `value` varchar(100) NOT NULL,
-  PRIMARY KEY (`module`,`param`)
+  `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1516,14 +1391,10 @@ INSERT INTO `ModulesParam` (`module`, `param`, `value`) VALUES
 -- Структура таблицы `ModulesTitleIcon`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesTitleIcon` (
-  `module` bigint(20) unsigned NOT NULL,
+CREATE TABLE `ModulesTitleIcon` (
+  `module` bigint(20) UNSIGNED NOT NULL,
   `icon` varchar(200) NOT NULL,
-  `style` varchar(50) NOT NULL,
-  PRIMARY KEY (`module`),
-  UNIQUE KEY `module_UNIQUE` (`module`),
-  KEY `fk_ModulesTitleIcon_1_idx` (`module`),
-  KEY `fk_ModulesTitleIcon_2_idx` (`style`)
+  `style` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1532,13 +1403,11 @@ CREATE TABLE IF NOT EXISTS `ModulesTitleIcon` (
 -- Структура таблицы `ModulesTitleIconStile`
 --
 
-CREATE TABLE IF NOT EXISTS `ModulesTitleIconStile` (
+CREATE TABLE `ModulesTitleIconStile` (
   `style` varchar(50) NOT NULL,
   `align` varchar(50) NOT NULL,
-  `width` int(10) unsigned NOT NULL,
-  `height` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`style`),
-  UNIQUE KEY `style_UNIQUE` (`style`)
+  `width` int(10) UNSIGNED NOT NULL,
+  `height` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1547,11 +1416,10 @@ CREATE TABLE IF NOT EXISTS `ModulesTitleIconStile` (
 -- Структура таблицы `PageParam`
 --
 
-CREATE TABLE IF NOT EXISTS `PageParam` (
+CREATE TABLE `PageParam` (
   `page` varchar(50) NOT NULL,
   `param` varchar(100) NOT NULL,
-  `value` varchar(100) NOT NULL,
-  PRIMARY KEY (`page`,`param`)
+  `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1570,21 +1438,17 @@ INSERT INTO `PageParam` (`page`, `param`, `value`) VALUES
 -- Структура таблицы `Pages`
 --
 
-CREATE TABLE IF NOT EXISTS `Pages` (
+CREATE TABLE `Pages` (
   `alias` varchar(50) NOT NULL,
-  `showTitle` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `showTitle` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
   `cssClasses` varchar(200) DEFAULT NULL,
-  `componentElement` bigint(20) unsigned NOT NULL,
+  `componentElement` bigint(20) UNSIGNED NOT NULL,
   `template` varchar(50) NOT NULL,
-  `isMainPage` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `index` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `follow` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `archive` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `notModifiable` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Означает что страница была создана не пользователем а компонентой и может быть удалена только через эту компоненту.',
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`),
-  KEY `fk_Pages_1_idx` (`componentElement`),
-  KEY `fk_Pages_2_idx` (`template`)
+  `isMainPage` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `index` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `follow` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `archive` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `notModifiable` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Означает что страница была создана не пользователем а компонентой и может быть удалена только через эту компоненту.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1608,15 +1472,13 @@ INSERT INTO `Pages` (`alias`, `showTitle`, `cssClasses`, `componentElement`, `te
 -- Структура таблицы `Pages_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `Pages_Lang` (
+CREATE TABLE `Pages_Lang` (
   `page` varchar(50) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `browserTitle` varchar(100) NOT NULL,
   `pageTitle` varchar(100) NOT NULL,
   `description` text,
-  `keywords` text,
-  PRIMARY KEY (`page`,`lang`),
-  KEY `fk_Pages_Lang_2_idx` (`lang`)
+  `keywords` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1645,18 +1507,15 @@ INSERT INTO `Pages_Lang` (`page`, `lang`, `browserTitle`, `pageTitle`, `descript
 -- Структура таблицы `ParamInfo_ComponentsElements`
 --
 
-CREATE TABLE IF NOT EXISTS `ParamInfo_ComponentsElements` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `componentElement` bigint(20) unsigned NOT NULL,
+CREATE TABLE `ParamInfo_ComponentsElements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `componentElement` bigint(20) UNSIGNED NOT NULL,
   `param` varchar(100) NOT NULL DEFAULT 'name',
   `mandatory` tinyint(4) NOT NULL DEFAULT '1',
   `coments` text NOT NULL,
   `table` varchar(200) DEFAULT NULL,
-  `column` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `param_UNIQUE` (`param`,`componentElement`),
-  KEY `fk_ParamInfo_ComponentsElements_1_idx` (`componentElement`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `column` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `ParamInfo_ComponentsElements`
@@ -1673,7 +1532,7 @@ INSERT INTO `ParamInfo_ComponentsElements` (`id`, `componentElement`, `param`, `
 -- Структура таблицы `Personnel`
 --
 
-CREATE TABLE IF NOT EXISTS `Personnel` (
+CREATE TABLE `Personnel` (
   `id` varchar(100) NOT NULL,
   `fio` varchar(100) NOT NULL,
   `birthdate` date NOT NULL,
@@ -1681,9 +1540,7 @@ CREATE TABLE IF NOT EXISTS `Personnel` (
   `education` varchar(50) DEFAULT NULL COMMENT 'Образование',
   `workExperience` varchar(50) DEFAULT NULL COMMENT 'Стаж работы',
   `experience` varchar(50) DEFAULT NULL COMMENT 'Опыт работы',
-  `drivingExperience` varchar(50) DEFAULT NULL COMMENT 'Стаж вождения',
-  PRIMARY KEY (`id`),
-  KEY `fk_Personnel_1_idx` (`post`)
+  `drivingExperience` varchar(50) DEFAULT NULL COMMENT 'Стаж вождения'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1708,11 +1565,10 @@ INSERT INTO `Personnel` (`id`, `fio`, `birthdate`, `post`, `education`, `workExp
 -- Структура таблицы `PersonnelPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `PersonnelPosts` (
+CREATE TABLE `PersonnelPosts` (
   `id` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `priority` int(2) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  `priority` int(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1731,11 +1587,10 @@ INSERT INTO `PersonnelPosts` (`id`, `name`, `priority`) VALUES
 -- Структура таблицы `PluginDefaultParam`
 --
 
-CREATE TABLE IF NOT EXISTS `PluginDefaultParam` (
+CREATE TABLE `PluginDefaultParam` (
   `plugin` varchar(50) NOT NULL,
   `param` varchar(100) NOT NULL,
-  `value` varchar(100) NOT NULL,
-  PRIMARY KEY (`plugin`,`param`)
+  `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1752,19 +1607,14 @@ INSERT INTO `PluginDefaultParam` (`plugin`, `param`, `value`) VALUES
 -- Структура таблицы `PluginDepends`
 --
 
-CREATE TABLE IF NOT EXISTS `PluginDepends` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PluginDepends` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `elementType` varchar(50) NOT NULL,
   `plugin` varchar(50) NOT NULL,
   `depends` varchar(50) NOT NULL,
   `versionStart` varchar(100) DEFAULT NULL,
-  `versionEnd` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `depends_UNIQUE` (`depends`,`plugin`,`elementType`),
-  KEY `fk_PluginDepends_1_idx` (`elementType`),
-  KEY `fk_PluginDepends_2_idx` (`plugin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `versionEnd` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1772,16 +1622,11 @@ CREATE TABLE IF NOT EXISTS `PluginDepends` (
 -- Структура таблицы `PluginOnPage`
 --
 
-CREATE TABLE IF NOT EXISTS `PluginOnPage` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PluginOnPage` (
+  `id` int(10) UNSIGNED NOT NULL,
   `plugin` varchar(50) NOT NULL,
-  `page` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `plugin_UNIQUE` (`plugin`,`page`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_PluginOnPage_2_idx` (`page`),
-  KEY `fk_PluginOnPage_1_idx` (`plugin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `page` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1789,11 +1634,10 @@ CREATE TABLE IF NOT EXISTS `PluginOnPage` (
 -- Структура таблицы `PluginParam`
 --
 
-CREATE TABLE IF NOT EXISTS `PluginParam` (
-  `plugin` int(10) unsigned NOT NULL,
+CREATE TABLE `PluginParam` (
+  `plugin` int(10) UNSIGNED NOT NULL,
   `param` varchar(100) NOT NULL,
-  `value` varchar(100) NOT NULL,
-  PRIMARY KEY (`plugin`,`param`)
+  `value` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -1802,7 +1646,7 @@ CREATE TABLE IF NOT EXISTS `PluginParam` (
 -- Структура таблицы `Plugins`
 --
 
-CREATE TABLE IF NOT EXISTS `Plugins` (
+CREATE TABLE `Plugins` (
   `alias` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `author` varchar(100) NOT NULL,
@@ -1812,11 +1656,9 @@ CREATE TABLE IF NOT EXISTS `Plugins` (
   `head` varchar(100) DEFAULT NULL,
   `bodyEnd` varchar(100) DEFAULT NULL,
   `admin` varchar(100) DEFAULT NULL,
-  `onAllPages` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `sequence` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `sequence_UNIQUE` (`sequence`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `onAllPages` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `sequence` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `Plugins`
@@ -1840,12 +1682,9 @@ INSERT INTO `Plugins` (`alias`, `name`, `author`, `version`, `description`, `mai
 -- Структура таблицы `PluginsDependsElementsType`
 --
 
-CREATE TABLE IF NOT EXISTS `PluginsDependsElementsType` (
+CREATE TABLE `PluginsDependsElementsType` (
   `elementType` varchar(50) NOT NULL,
-  `tableName` varchar(50) NOT NULL,
-  PRIMARY KEY (`elementType`),
-  UNIQUE KEY `elementType_UNIQUE` (`elementType`),
-  UNIQUE KEY `tableName_UNIQUE` (`tableName`)
+  `tableName` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1863,14 +1702,13 @@ INSERT INTO `PluginsDependsElementsType` (`elementType`, `tableName`) VALUES
 -- Структура таблицы `PricesAdditionalServices`
 --
 
-CREATE TABLE IF NOT EXISTS `PricesAdditionalServices` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PricesAdditionalServices` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `cost` int(11) NOT NULL,
-  `perHour` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `sequence` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `perHour` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `sequence` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `PricesAdditionalServices`
@@ -1889,18 +1727,16 @@ INSERT INTO `PricesAdditionalServices` (`id`, `name`, `cost`, `perHour`, `sequen
 -- Структура таблицы `PricesCourses`
 --
 
-CREATE TABLE IF NOT EXISTS `PricesCourses` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PricesCourses` (
+  `id` int(10) UNSIGNED NOT NULL,
   `сours` varchar(100) NOT NULL,
-  `theory` float unsigned NOT NULL,
-  `practice` float unsigned NOT NULL,
+  `theory` float UNSIGNED NOT NULL,
+  `practice` float UNSIGNED NOT NULL,
   `duration` varchar(100) NOT NULL,
-  `cost` int(10) unsigned NOT NULL,
+  `cost` int(10) UNSIGNED NOT NULL,
   `category` varchar(100) NOT NULL,
-  `sequence` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Courses_1_idx` (`category`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `sequence` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `PricesCourses`
@@ -1920,11 +1756,10 @@ INSERT INTO `PricesCourses` (`id`, `сours`, `theory`, `practice`, `duration`, `
 -- Структура таблицы `PricesCoursesCategory`
 --
 
-CREATE TABLE IF NOT EXISTS `PricesCoursesCategory` (
+CREATE TABLE `PricesCoursesCategory` (
   `category` varchar(100) NOT NULL,
   `description` longtext,
-  `sequence` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`category`)
+  `sequence` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1942,7 +1777,7 @@ INSERT INTO `PricesCoursesCategory` (`category`, `description`, `sequence`) VALU
 -- Структура таблицы `ROOT_SETTINGS`
 --
 
-CREATE TABLE IF NOT EXISTS `ROOT_SETTINGS` (
+CREATE TABLE `ROOT_SETTINGS` (
   `settingsName` varchar(50) NOT NULL,
   `superKey` varchar(100) NOT NULL,
   `multilanguage` tinyint(4) NOT NULL DEFAULT '0',
@@ -1950,9 +1785,7 @@ CREATE TABLE IF NOT EXISTS `ROOT_SETTINGS` (
   `charset` varchar(100) NOT NULL,
   `companyName` varchar(100) DEFAULT NULL,
   `siteName` varchar(100) NOT NULL,
-  `activated` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`settingsName`),
-  UNIQUE KEY `settingsName_UNIQUE` (`settingsName`)
+  `activated` tinyint(4) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1968,34 +1801,26 @@ INSERT INTO `ROOT_SETTINGS` (`settingsName`, `superKey`, `multilanguage`, `siteC
 -- Структура таблицы `Sliders`
 --
 
-CREATE TABLE IF NOT EXISTS `Sliders` (
+CREATE TABLE `Sliders` (
   `alias` varchar(100) NOT NULL,
   `theme` varchar(50) NOT NULL,
-  `hideTools` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `show_randomly` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `controls` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `hideTools` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `show_randomly` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `controls` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
   `controls_position` varchar(50) NOT NULL,
-  `focus` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `focus` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `focus_position` varchar(50) NOT NULL,
-  `numbers` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `numbers` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `numbers_align` varchar(50) NOT NULL,
-  `progressbar` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `progressbar` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `enable_navigation_keys` tinyint(4) NOT NULL DEFAULT '1',
-  `label` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `label` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
   `labelAnimation` varchar(50) NOT NULL,
-  `dots` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `thumbs` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `preview` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `dots` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `thumbs` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `preview` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
   `animations` varchar(50) NOT NULL,
-  `interval` int(10) unsigned NOT NULL DEFAULT '4000',
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`),
-  KEY `fk_Sliders_SlidersThemes_idx` (`theme`),
-  KEY `fk_Sliders_1_idx` (`controls_position`),
-  KEY `fk_Sliders_2_idx` (`focus_position`),
-  KEY `fk_Sliders_3_idx` (`numbers_align`),
-  KEY `fk_Sliders_4_idx` (`labelAnimation`),
-  KEY `fk_Sliders_5_idx` (`animations`)
+  `interval` int(10) UNSIGNED NOT NULL DEFAULT '4000'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2012,11 +1837,9 @@ INSERT INTO `Sliders` (`alias`, `theme`, `hideTools`, `show_randomly`, `controls
 -- Структура таблицы `SlidersControlsPosition`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidersControlsPosition` (
+CREATE TABLE `SlidersControlsPosition` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2036,11 +1859,9 @@ INSERT INTO `SlidersControlsPosition` (`alias`, `description`) VALUES
 -- Структура таблицы `SlidersFocusPosition`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidersFocusPosition` (
+CREATE TABLE `SlidersFocusPosition` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2060,11 +1881,9 @@ INSERT INTO `SlidersFocusPosition` (`alias`, `description`) VALUES
 -- Структура таблицы `SlidersLabelAnimation`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidersLabelAnimation` (
+CREATE TABLE `SlidersLabelAnimation` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2083,11 +1902,9 @@ INSERT INTO `SlidersLabelAnimation` (`alias`, `description`) VALUES
 -- Структура таблицы `SlidersNumbersAlign`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidersNumbersAlign` (
+CREATE TABLE `SlidersNumbersAlign` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2105,11 +1922,9 @@ INSERT INTO `SlidersNumbersAlign` (`alias`, `description`) VALUES
 -- Структура таблицы `SlidersThemes`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidersThemes` (
+CREATE TABLE `SlidersThemes` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2129,17 +1944,13 @@ INSERT INTO `SlidersThemes` (`alias`, `description`) VALUES
 -- Структура таблицы `Slides`
 --
 
-CREATE TABLE IF NOT EXISTS `Slides` (
+CREATE TABLE `Slides` (
   `fileName` varchar(50) NOT NULL,
   `slider` varchar(100) NOT NULL,
   `sequence` int(11) NOT NULL,
   `animation` varchar(50) NOT NULL,
   `url` text,
-  `text` text,
-  PRIMARY KEY (`fileName`,`slider`),
-  UNIQUE KEY `sequence_UNIQUE` (`sequence`,`slider`),
-  KEY `fk_Slides_Sliders_idx` (`slider`),
-  KEY `fk_Slides_SlidesAnimations_idx` (`animation`)
+  `text` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2158,11 +1969,9 @@ INSERT INTO `Slides` (`fileName`, `slider`, `sequence`, `animation`, `url`, `tex
 -- Структура таблицы `SlidesAnimations`
 --
 
-CREATE TABLE IF NOT EXISTS `SlidesAnimations` (
+CREATE TABLE `SlidesAnimations` (
   `alias` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`alias`),
-  UNIQUE KEY `alias_UNIQUE` (`alias`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2215,16 +2024,12 @@ INSERT INTO `SlidesAnimations` (`alias`, `description`) VALUES
 -- Структура таблицы `TemplateBlocks`
 --
 
-CREATE TABLE IF NOT EXISTS `TemplateBlocks` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `TemplateBlocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `block` varchar(50) NOT NULL,
   `template` varchar(50) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `block_UNIQUE` (`block`,`template`),
-  KEY `fk_TemplateBlocks_1_idx` (`template`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=902 ;
+  `description` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `TemplateBlocks`
@@ -2246,16 +2051,13 @@ INSERT INTO `TemplateBlocks` (`id`, `block`, `template`, `description`) VALUES
 -- Структура таблицы `TemplateDependence`
 --
 
-CREATE TABLE IF NOT EXISTS `TemplateDependence` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `TemplateDependence` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `template` varchar(50) NOT NULL,
   `depends` varchar(50) NOT NULL,
   `versionStart` varchar(100) DEFAULT NULL,
-  `versionEnd` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `template_UNIQUE` (`template`,`depends`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `versionEnd` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2263,17 +2065,16 @@ CREATE TABLE IF NOT EXISTS `TemplateDependence` (
 -- Структура таблицы `Templates`
 --
 
-CREATE TABLE IF NOT EXISTS `Templates` (
+CREATE TABLE `Templates` (
   `alias` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
   `author` varchar(100) NOT NULL,
   `version` varchar(100) NOT NULL,
   `description` text,
-  `default` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `default` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `main` varchar(100) NOT NULL,
   `mobile` varchar(100) DEFAULT NULL,
-  `print` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`alias`)
+  `print` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2290,14 +2091,11 @@ INSERT INTO `Templates` (`alias`, `name`, `author`, `version`, `description`, `d
 -- Структура таблицы `UrlTarget`
 --
 
-CREATE TABLE IF NOT EXISTS `UrlTarget` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `UrlTarget` (
+  `id` int(10) UNSIGNED NOT NULL,
   `target` varchar(30) NOT NULL COMMENT 'инструкция об отскрытии ссылки',
-  `description` varchar(45) DEFAULT NULL COMMENT 'Описание',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `target_UNIQUE` (`target`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='тип ссылки. как ее открывать' AUTO_INCREMENT=5 ;
+  `description` varchar(45) DEFAULT NULL COMMENT 'Описание'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='тип ссылки. как ее открывать';
 
 --
 -- Дамп данных таблицы `UrlTarget`
@@ -2315,7 +2113,7 @@ INSERT INTO `UrlTarget` (`id`, `target`, `description`) VALUES
 -- Структура таблицы `Users`
 --
 
-CREATE TABLE IF NOT EXISTS `Users` (
+CREATE TABLE `Users` (
   `login` varchar(25) NOT NULL,
   `nickname` varchar(25) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
@@ -2324,15 +2122,15 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `ferstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `birthday` datetime NOT NULL,
-  `sex` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '1 - мужской\n0 - женский',
+  `sex` tinyint(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '1 - мужской\n0 - женский',
   `city` varchar(200) NOT NULL,
   `group` varchar(50) NOT NULL,
   `registered` datetime NOT NULL,
   `lastVisit` datetime NOT NULL,
-  `activated` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `activated` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `activatedHash` varchar(200) NOT NULL,
-  `disable` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `delete` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `disable` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `delete` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `status` varchar(150) DEFAULT NULL,
   `aboutYourself` text,
   `icq` varchar(9) DEFAULT NULL,
@@ -2347,12 +2145,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `livejournal` varchar(25) DEFAULT NULL,
   `blogger` varchar(25) DEFAULT NULL,
   `siteName` varchar(25) DEFAULT NULL,
-  `siteUrl` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`login`),
-  UNIQUE KEY `login_UNIQUE` (`login`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `phone_UNIQUE` (`phone`),
-  KEY `fk_Users_1_idx` (`group`)
+  `siteUrl` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2368,18 +2161,15 @@ INSERT INTO `Users` (`login`, `nickname`, `password`, `email`, `phone`, `ferstNa
 -- Структура таблицы `UsersAgreements`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersAgreements` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE `UsersAgreements` (
+  `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(150) NOT NULL,
   `text` longtext NOT NULL,
   `dateOfChange` datetime NOT NULL,
-  `sequence` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sequence` int(10) UNSIGNED NOT NULL,
   `site` tinyint(4) NOT NULL DEFAULT '1',
-  `admin` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `sequence_UNIQUE` (`sequence`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `admin` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `UsersAgreements`
@@ -2394,28 +2184,26 @@ INSERT INTO `UsersAgreements` (`id`, `name`, `text`, `dateOfChange`, `sequence`,
 -- Структура таблицы `UsersGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersGroups` (
+CREATE TABLE `UsersGroups` (
   `group` varchar(50) NOT NULL,
-  `adminDefault` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `siteDefault` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `loginInAdminPanel` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `changeSettings` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersShow` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersCreate` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersEdit` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersDelete` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersGroupCreate` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersGroupEdit` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionUsersGroupDelete` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionPagesCreate` tinyint(3) unsigned NOT NULL DEFAULT '1',
-  `permissionPagesEdit` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionPagesDelete` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionModulesCreate` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionModulesEdit` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionModulesDelete` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `permissionPluginsEdit` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`group`),
-  UNIQUE KEY `group_UNIQUE` (`group`)
+  `adminDefault` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `siteDefault` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `loginInAdminPanel` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `changeSettings` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersShow` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersCreate` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersEdit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersDelete` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersGroupCreate` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersGroupEdit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionUsersGroupDelete` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionPagesCreate` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `permissionPagesEdit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionPagesDelete` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionModulesCreate` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionModulesEdit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionModulesDelete` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `permissionPluginsEdit` tinyint(3) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2434,13 +2222,11 @@ INSERT INTO `UsersGroups` (`group`, `adminDefault`, `siteDefault`, `loginInAdmin
 -- Структура таблицы `UsersGroups_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersGroups_Lang` (
+CREATE TABLE `UsersGroups_Lang` (
   `group` varchar(50) NOT NULL,
   `lang` varchar(3) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`group`,`lang`),
-  KEY `fk_UsersGroups_Lang_2_idx` (`lang`)
+  `description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2459,8 +2245,8 @@ INSERT INTO `UsersGroups_Lang` (`group`, `lang`, `name`, `description`) VALUES
 -- Структура таблицы `UsersMassage`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersMassage` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `UsersMassage` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(150) DEFAULT NULL,
   `text` text NOT NULL,
   `date` datetime NOT NULL,
@@ -2469,12 +2255,8 @@ CREATE TABLE IF NOT EXISTS `UsersMassage` (
   `sender_read` tinyint(4) NOT NULL DEFAULT '0',
   `addressee_read` tinyint(4) NOT NULL DEFAULT '0',
   `sender_delete` tinyint(4) NOT NULL DEFAULT '0',
-  `addressee_delete` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_UsersMassage_1_idx` (`sender`),
-  KEY `fk_UsersMassage_2_idx` (`addressee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `addressee_delete` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2482,16 +2264,12 @@ CREATE TABLE IF NOT EXISTS `UsersMassage` (
 -- Структура таблицы `UsersNotifications`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersNotifications` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `UsersNotifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `user` varchar(25) NOT NULL,
   `date` datetime NOT NULL,
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_UsersNotifications_1_idx` (`type`),
-  KEY `fk_UsersNotifications_2_idx` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `type` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2499,10 +2277,8 @@ CREATE TABLE IF NOT EXISTS `UsersNotifications` (
 -- Структура таблицы `UsersNotificationsType`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersNotificationsType` (
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`type`),
-  UNIQUE KEY `type_UNIQUE` (`type`)
+CREATE TABLE `UsersNotificationsType` (
+  `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -2520,15 +2296,906 @@ INSERT INTO `UsersNotificationsType` (`type`) VALUES
 -- Структура таблицы `UsersNotifications_Lang`
 --
 
-CREATE TABLE IF NOT EXISTS `UsersNotifications_Lang` (
-  `usersNotifications` bigint(20) unsigned NOT NULL,
+CREATE TABLE `UsersNotifications_Lang` (
+  `usersNotifications` bigint(20) UNSIGNED NOT NULL,
   `lang` varchar(3) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `text` longtext NOT NULL,
-  PRIMARY KEY (`usersNotifications`,`lang`),
-  UNIQUE KEY `lang_UNIQUE` (`lang`,`usersNotifications`)
+  `text` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `UsersOnlineApplications`
+--
+
+CREATE TABLE `UsersOnlineApplications` (
+  `id` varchar(100) NOT NULL,
+  `fio` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `message` longtext,
+  `creation` datetime NOT NULL,
+  `totalStatus` varchar(50) NOT NULL,
+  `changed` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `UsersOnlineApplicationsLogStatusTransition`
+--
+
+CREATE TABLE `UsersOnlineApplicationsLogStatusTransition` (
+  `onlineApplication` varchar(100) NOT NULL,
+  `changed` datetime NOT NULL,
+  `startStatus` varchar(50) NOT NULL,
+  `endStatus` varchar(50) NOT NULL,
+  `managerComment` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `UsersOnlineApplicationsStatuses`
+--
+
+CREATE TABLE `UsersOnlineApplicationsStatuses` (
+  `status` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `UsersOnlineApplicationsStatuses`
+--
+
+INSERT INTO `UsersOnlineApplicationsStatuses` (`status`, `name`, `description`) VALUES
+('callBack', 'нужно перезвонить', 'Человек просил перезвонить позже'),
+('created', 'не обработана', 'Заявка была создана, но ей еще никто не занимался'),
+('denied', 'мы отказали', 'По тем или иным причинам мы отказали в этой заявке'),
+('makeTheContract', 'составлен договор', 'Был составлен договор на обучение'),
+('notAvailable', 'телефон недоступен', 'Телефон не отвечает'),
+('pay', 'оплачено', 'Внесены деньги по договору за обучение'),
+('refused', 'нам отказали', 'Человек отказался составить договор'),
+('talked', 'связались', 'С человеком связались по телефону и поговорили');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `UsersOnlineApplicationsStatuseTransition`
+--
+
+CREATE TABLE `UsersOnlineApplicationsStatuseTransition` (
+  `startStatus` varchar(50) NOT NULL,
+  `endStatus` varchar(50) NOT NULL,
+  `bottonText` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `UsersOnlineApplicationsStatuseTransition`
+--
+
+INSERT INTO `UsersOnlineApplicationsStatuseTransition` (`startStatus`, `endStatus`, `bottonText`) VALUES
+('callBack', 'callBack', 'просили перезвонить позже'),
+('callBack', 'denied', 'отказать в заявке'),
+('callBack', 'notAvailable', 'недозвонились'),
+('callBack', 'refused', 'отказались общатсья'),
+('callBack', 'talked', 'поговорили'),
+('created', 'callBack', 'просили перезвонить позже'),
+('created', 'denied', 'отказать в заявке'),
+('created', 'notAvailable', 'недозвонились'),
+('created', 'refused', 'отказались общатсья'),
+('created', 'talked', 'поговорили'),
+('makeTheContract', 'callBack', 'просили перезвонить позже'),
+('makeTheContract', 'denied', 'отказать в заявке'),
+('makeTheContract', 'notAvailable', 'недозвонились'),
+('makeTheContract', 'pay', 'оплатили'),
+('makeTheContract', 'refused', 'отказались общатсья'),
+('notAvailable', 'callBack', 'просили перезвонить позже'),
+('notAvailable', 'denied', 'отказать в заявке'),
+('notAvailable', 'notAvailable', 'недозвонились'),
+('notAvailable', 'talked', 'поговорили'),
+('talked', 'callBack', 'просили перезвонить позже'),
+('talked', 'denied', 'отказать в заявке'),
+('talked', 'makeTheContract', 'заключили договор'),
+('talked', 'notAvailable', 'недозвонились'),
+('talked', 'refused', 'отказались общатсья');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `Components`
+--
+ALTER TABLE `Components`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
+
+--
+-- Индексы таблицы `ComponentsDepends`
+--
+ALTER TABLE `ComponentsDepends`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `depends_UNIQUE` (`depends`,`component`,`elementType`),
+  ADD KEY `fk_ComponentsDepends_1_idx` (`elementType`),
+  ADD KEY `fk_ComponentsDepends_2_idx` (`component`);
+
+--
+-- Индексы таблицы `ComponentsDependsElementsType`
+--
+ALTER TABLE `ComponentsDependsElementsType`
+  ADD PRIMARY KEY (`elementType`),
+  ADD UNIQUE KEY `elementType_UNIQUE` (`elementType`);
+
+--
+-- Индексы таблицы `ComponentsElements`
+--
+ALTER TABLE `ComponentsElements`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `component_UNIQUE` (`component`,`alias`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`,`component`);
+
+--
+-- Индексы таблицы `ContactsUnits`
+--
+ALTER TABLE `ContactsUnits`
+  ADD PRIMARY KEY (`unit`),
+  ADD KEY `fk_ContactsUnits_1_idx` (`type`);
+
+--
+-- Индексы таблицы `ContactsUnitsMaps`
+--
+ALTER TABLE `ContactsUnitsMaps`
+  ADD PRIMARY KEY (`unit`,`map`),
+  ADD KEY `fk_ContactsUnitsMaps_2_idx` (`map`);
+
+--
+-- Индексы таблицы `ContactsUnitsTypes`
+--
+ALTER TABLE `ContactsUnitsTypes`
+  ADD PRIMARY KEY (`type`),
+  ADD UNIQUE KEY `unique_sequence` (`sequence`);
+
+--
+-- Индексы таблицы `ContactsUnitsTypes_Lang`
+--
+ALTER TABLE `ContactsUnitsTypes_Lang`
+  ADD PRIMARY KEY (`type`,`lang`),
+  ADD KEY `fk_ContactsTypes_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsUnitsWokers`
+--
+ALTER TABLE `ContactsUnitsWokers`
+  ADD PRIMARY KEY (`unit`,`worker`),
+  ADD KEY `fk_ContactsUnitsWokers_2_idx` (`worker`);
+
+--
+-- Индексы таблицы `ContactsUnits_Lang`
+--
+ALTER TABLE `ContactsUnits_Lang`
+  ADD PRIMARY KEY (`unit`,`lang`),
+  ADD KEY `fk_ContactsUnits_lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsWorkers`
+--
+ALTER TABLE `ContactsWorkers`
+  ADD PRIMARY KEY (`worker`),
+  ADD KEY `fk_ContactsWorkers_1_idx` (`post`);
+
+--
+-- Индексы таблицы `ContactsWorkersPosts`
+--
+ALTER TABLE `ContactsWorkersPosts`
+  ADD PRIMARY KEY (`post`),
+  ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`);
+
+--
+-- Индексы таблицы `ContactsWorkersPosts_Lang`
+--
+ALTER TABLE `ContactsWorkersPosts_Lang`
+  ADD PRIMARY KEY (`post`,`lang`),
+  ADD KEY `fk_ContactsWorkersPosts_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ContactsWorkers_Lang`
+--
+ALTER TABLE `ContactsWorkers_Lang`
+  ADD PRIMARY KEY (`worker`,`lang`),
+  ADD KEY `fk_ContactsWorkers_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `CreatedModules`
+--
+ALTER TABLE `CreatedModules`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_CreatedModules_1_idx` (`module`);
+
+--
+-- Индексы таблицы `DBerrors`
+--
+ALTER TABLE `DBerrors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `Feedbacks`
+--
+ALTER TABLE `Feedbacks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Feedbacks_1_idx` (`rating`),
+  ADD KEY `fk_Feedbacks_2_idx` (`ip`);
+
+--
+-- Индексы таблицы `FeedbacksIsComments`
+--
+ALTER TABLE `FeedbacksIsComments`
+  ADD PRIMARY KEY (`feedback`,`parentFeedback`),
+  ADD KEY `fk_FeedbacksIsComments_2_idx` (`parentFeedback`);
+
+--
+-- Индексы таблицы `FeedbacksLike`
+--
+ALTER TABLE `FeedbacksLike`
+  ADD PRIMARY KEY (`ip`,`feedback`),
+  ADD KEY `fk_FeedbacksLike_1_idx` (`feedback`);
+
+--
+-- Индексы таблицы `FeedbacksListIP`
+--
+ALTER TABLE `FeedbacksListIP`
+  ADD PRIMARY KEY (`ip`),
+  ADD KEY `fk_FeedbacksListIP_1_idx` (`status`);
+
+--
+-- Индексы таблицы `FeedbacksListIPStatus`
+--
+ALTER TABLE `FeedbacksListIPStatus`
+  ADD PRIMARY KEY (`status`);
+
+--
+-- Индексы таблицы `FeedbacksRating`
+--
+ALTER TABLE `FeedbacksRating`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `value_UNIQUE` (`value`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
+
+--
+-- Индексы таблицы `HtmlModul`
+--
+ALTER TABLE `HtmlModul`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
+
+--
+-- Индексы таблицы `HtmlModul_Lang`
+--
+ALTER TABLE `HtmlModul_Lang`
+  ADD PRIMARY KEY (`htmlModul`,`lang`),
+  ADD KEY `fk_HtmlModul_Lang_HtmlModul_idx` (`htmlModul`),
+  ADD KEY `fk_HtmlModul_Lang_Lang_idx` (`lang`);
+
+--
+-- Индексы таблицы `JCropTypes`
+--
+ALTER TABLE `JCropTypes`
+  ADD PRIMARY KEY (`type`),
+  ADD UNIQUE KEY `boxId_UNIQUE` (`type`);
+
+--
+-- Индексы таблицы `Jquery`
+--
+ALTER TABLE `Jquery`
+  ADD PRIMARY KEY (`fileName`),
+  ADD UNIQUE KEY `version_UNIQUE` (`version`,`min`),
+  ADD UNIQUE KEY `fileName_UNIQUE` (`fileName`);
+
+--
+-- Индексы таблицы `Lang`
+--
+ALTER TABLE `Lang`
+  ADD PRIMARY KEY (`lang`),
+  ADD UNIQUE KEY `lang_UNIQUE` (`lang`),
+  ADD UNIQUE KEY `langName_UNIQUE` (`langName`);
+
+--
+-- Индексы таблицы `Maps`
+--
+ALTER TABLE `Maps`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `Materials`
+--
+ALTER TABLE `Materials`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `MaterialsCategories`
+--
+ALTER TABLE `MaterialsCategories`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `MaterialsCategoriesInList`
+--
+ALTER TABLE `MaterialsCategoriesInList`
+  ADD PRIMARY KEY (`category`,`list`),
+  ADD UNIQUE KEY `key_UNIQUE` (`sequence`,`list`),
+  ADD KEY `fk_MaterialsCategories_has_CategoriesList_CategoriesList1_idx` (`list`),
+  ADD KEY `fk_MaterialsCategories_has_CategoriesList_MaterialsCategori_idx` (`category`);
+
+--
+-- Индексы таблицы `MaterialsCategoriesList`
+--
+ALTER TABLE `MaterialsCategoriesList`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
+
+--
+-- Индексы таблицы `MaterialsCategoriesList_Lang`
+--
+ALTER TABLE `MaterialsCategoriesList_Lang`
+  ADD PRIMARY KEY (`list`,`lang`),
+  ADD KEY `fk_MaterialsCategoriesList_Lang_MaterialsCategories_idx` (`list`),
+  ADD KEY `fk_MaterialsCategoriesList_Lang_Lang_idx` (`lang`);
+
+--
+-- Индексы таблицы `MaterialsCategories_Lang`
+--
+ALTER TABLE `MaterialsCategories_Lang`
+  ADD PRIMARY KEY (`category`,`lang`),
+  ADD KEY `fk_MaterialsCategories_Lang_MaterialsCategories_idx` (`category`),
+  ADD KEY `fk_MaterialsCategories_Lang_Lang_idx` (`lang`);
+
+--
+-- Индексы таблицы `MaterialsInCategories`
+--
+ALTER TABLE `MaterialsInCategories`
+  ADD PRIMARY KEY (`material`,`category`),
+  ADD KEY `fk_MaterialsInCategories_Materials_idx` (`material`),
+  ADD KEY `fk_MaterialsInCategories_MaterialsCategories_idx` (`category`);
+
+--
+-- Индексы таблицы `Materials_Lang`
+--
+ALTER TABLE `Materials_Lang`
+  ADD PRIMARY KEY (`material`,`lang`),
+  ADD KEY `fk_Materials_Lang_Materials_idx` (`material`),
+  ADD KEY `fk_Materials_Lang_Lang_idx` (`lang`);
+
+--
+-- Индексы таблицы `Menu`
+--
+ALTER TABLE `Menu`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`),
+  ADD KEY `fk_Menu_MenuTypes` (`type`);
+
+--
+-- Индексы таблицы `MenuItemParent`
+--
+ALTER TABLE `MenuItemParent`
+  ADD PRIMARY KEY (`menuItem`,`parent`),
+  ADD UNIQUE KEY `menuItem_UNIQUE` (`menuItem`),
+  ADD KEY `fk_MenuItemParent_MenuItems1` (`menuItem`),
+  ADD KEY `fk_MenuItemParent_MenuItems2` (`parent`);
+
+--
+-- Индексы таблицы `MenuItems`
+--
+ALTER TABLE `MenuItems`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `key_UNIQUE` (`sequence`,`menu`),
+  ADD KEY `fk_MenuItems_UrlTarget` (`target`),
+  ADD KEY `fk_MenuElements_Menu` (`menu`);
+
+--
+-- Индексы таблицы `MenuItemsPage`
+--
+ALTER TABLE `MenuItemsPage`
+  ADD PRIMARY KEY (`menuItem`,`page`),
+  ADD UNIQUE KEY `menuItem_UNIQUE` (`menuItem`),
+  ADD KEY `fk_MenuItemsPage_MenuItems` (`menuItem`),
+  ADD KEY `fk_MenuItemsPage_Pages` (`page`);
+
+--
+-- Индексы таблицы `MenuItems_Lang`
+--
+ALTER TABLE `MenuItems_Lang`
+  ADD PRIMARY KEY (`menuItem`,`lang`),
+  ADD KEY `fk_MenuItems_Lang_MenuItems` (`menuItem`),
+  ADD KEY `fk_MenuItems_Lang_Lang` (`lang`);
+
+--
+-- Индексы таблицы `MenuTypes`
+--
+ALTER TABLE `MenuTypes`
+  ADD PRIMARY KEY (`type`),
+  ADD UNIQUE KEY `type_UNIQUE` (`type`);
+
+--
+-- Индексы таблицы `Modules`
+--
+ALTER TABLE `Modules`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
+
+--
+-- Индексы таблицы `ModulesDepends`
+--
+ALTER TABLE `ModulesDepends`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `depends_UNIQUE` (`depends`,`module`,`elementType`),
+  ADD KEY `fk_ModulesDepends_1_idx` (`elementType`),
+  ADD KEY `fk_ModulesDepends_2` (`module`);
+
+--
+-- Индексы таблицы `ModulesDependsElementsType`
+--
+ALTER TABLE `ModulesDependsElementsType`
+  ADD PRIMARY KEY (`elementType`),
+  ADD UNIQUE KEY `tableName_UNIQUE` (`tableName`),
+  ADD UNIQUE KEY `elementType_UNIQUE` (`elementType`);
+
+--
+-- Индексы таблицы `ModulesInBlocks`
+--
+ALTER TABLE `ModulesInBlocks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `module_UNIQUE` (`module`,`block`),
+  ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`,`block`),
+  ADD KEY `fk_ModulesInBlocks_2_idx` (`block`);
+
+--
+-- Индексы таблицы `ModulesInBlocks_Lang`
+--
+ALTER TABLE `ModulesInBlocks_Lang`
+  ADD PRIMARY KEY (`module`,`lang`),
+  ADD KEY `fk_ModulesInBlocks_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ModulesOnPages`
+--
+ALTER TABLE `ModulesOnPages`
+  ADD PRIMARY KEY (`module`,`page`),
+  ADD KEY `fk_ModulesOnPages_2_idx` (`page`),
+  ADD KEY `fk_ModulesOnPages_1_idx` (`module`);
+
+--
+-- Индексы таблицы `ModulesParam`
+--
+ALTER TABLE `ModulesParam`
+  ADD PRIMARY KEY (`module`,`param`);
+
+--
+-- Индексы таблицы `ModulesTitleIcon`
+--
+ALTER TABLE `ModulesTitleIcon`
+  ADD PRIMARY KEY (`module`),
+  ADD UNIQUE KEY `module_UNIQUE` (`module`),
+  ADD KEY `fk_ModulesTitleIcon_1_idx` (`module`),
+  ADD KEY `fk_ModulesTitleIcon_2_idx` (`style`);
+
+--
+-- Индексы таблицы `ModulesTitleIconStile`
+--
+ALTER TABLE `ModulesTitleIconStile`
+  ADD PRIMARY KEY (`style`),
+  ADD UNIQUE KEY `style_UNIQUE` (`style`);
+
+--
+-- Индексы таблицы `PageParam`
+--
+ALTER TABLE `PageParam`
+  ADD PRIMARY KEY (`page`,`param`);
+
+--
+-- Индексы таблицы `Pages`
+--
+ALTER TABLE `Pages`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`),
+  ADD KEY `fk_Pages_1_idx` (`componentElement`),
+  ADD KEY `fk_Pages_2_idx` (`template`);
+
+--
+-- Индексы таблицы `Pages_Lang`
+--
+ALTER TABLE `Pages_Lang`
+  ADD PRIMARY KEY (`page`,`lang`),
+  ADD KEY `fk_Pages_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `ParamInfo_ComponentsElements`
+--
+ALTER TABLE `ParamInfo_ComponentsElements`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `param_UNIQUE` (`param`,`componentElement`),
+  ADD KEY `fk_ParamInfo_ComponentsElements_1_idx` (`componentElement`);
+
+--
+-- Индексы таблицы `Personnel`
+--
+ALTER TABLE `Personnel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Personnel_1_idx` (`post`);
+
+--
+-- Индексы таблицы `PersonnelPosts`
+--
+ALTER TABLE `PersonnelPosts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `PluginDefaultParam`
+--
+ALTER TABLE `PluginDefaultParam`
+  ADD PRIMARY KEY (`plugin`,`param`);
+
+--
+-- Индексы таблицы `PluginDepends`
+--
+ALTER TABLE `PluginDepends`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `depends_UNIQUE` (`depends`,`plugin`,`elementType`),
+  ADD KEY `fk_PluginDepends_1_idx` (`elementType`),
+  ADD KEY `fk_PluginDepends_2_idx` (`plugin`);
+
+--
+-- Индексы таблицы `PluginOnPage`
+--
+ALTER TABLE `PluginOnPage`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `plugin_UNIQUE` (`plugin`,`page`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_PluginOnPage_2_idx` (`page`),
+  ADD KEY `fk_PluginOnPage_1_idx` (`plugin`);
+
+--
+-- Индексы таблицы `PluginParam`
+--
+ALTER TABLE `PluginParam`
+  ADD PRIMARY KEY (`plugin`,`param`);
+
+--
+-- Индексы таблицы `Plugins`
+--
+ALTER TABLE `Plugins`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`);
+
+--
+-- Индексы таблицы `PluginsDependsElementsType`
+--
+ALTER TABLE `PluginsDependsElementsType`
+  ADD PRIMARY KEY (`elementType`),
+  ADD UNIQUE KEY `elementType_UNIQUE` (`elementType`),
+  ADD UNIQUE KEY `tableName_UNIQUE` (`tableName`);
+
+--
+-- Индексы таблицы `PricesAdditionalServices`
+--
+ALTER TABLE `PricesAdditionalServices`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `PricesCourses`
+--
+ALTER TABLE `PricesCourses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Courses_1_idx` (`category`);
+
+--
+-- Индексы таблицы `PricesCoursesCategory`
+--
+ALTER TABLE `PricesCoursesCategory`
+  ADD PRIMARY KEY (`category`);
+
+--
+-- Индексы таблицы `ROOT_SETTINGS`
+--
+ALTER TABLE `ROOT_SETTINGS`
+  ADD PRIMARY KEY (`settingsName`),
+  ADD UNIQUE KEY `settingsName_UNIQUE` (`settingsName`);
+
+--
+-- Индексы таблицы `Sliders`
+--
+ALTER TABLE `Sliders`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`),
+  ADD KEY `fk_Sliders_SlidersThemes_idx` (`theme`),
+  ADD KEY `fk_Sliders_1_idx` (`controls_position`),
+  ADD KEY `fk_Sliders_2_idx` (`focus_position`),
+  ADD KEY `fk_Sliders_3_idx` (`numbers_align`),
+  ADD KEY `fk_Sliders_4_idx` (`labelAnimation`),
+  ADD KEY `fk_Sliders_5_idx` (`animations`);
+
+--
+-- Индексы таблицы `SlidersControlsPosition`
+--
+ALTER TABLE `SlidersControlsPosition`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `SlidersFocusPosition`
+--
+ALTER TABLE `SlidersFocusPosition`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `SlidersLabelAnimation`
+--
+ALTER TABLE `SlidersLabelAnimation`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `SlidersNumbersAlign`
+--
+ALTER TABLE `SlidersNumbersAlign`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `SlidersThemes`
+--
+ALTER TABLE `SlidersThemes`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `Slides`
+--
+ALTER TABLE `Slides`
+  ADD PRIMARY KEY (`fileName`,`slider`),
+  ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`,`slider`),
+  ADD KEY `fk_Slides_Sliders_idx` (`slider`),
+  ADD KEY `fk_Slides_SlidesAnimations_idx` (`animation`);
+
+--
+-- Индексы таблицы `SlidesAnimations`
+--
+ALTER TABLE `SlidesAnimations`
+  ADD PRIMARY KEY (`alias`),
+  ADD UNIQUE KEY `alias_UNIQUE` (`alias`);
+
+--
+-- Индексы таблицы `TemplateBlocks`
+--
+ALTER TABLE `TemplateBlocks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `block_UNIQUE` (`block`,`template`),
+  ADD KEY `fk_TemplateBlocks_1_idx` (`template`);
+
+--
+-- Индексы таблицы `TemplateDependence`
+--
+ALTER TABLE `TemplateDependence`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `template_UNIQUE` (`template`,`depends`);
+
+--
+-- Индексы таблицы `Templates`
+--
+ALTER TABLE `Templates`
+  ADD PRIMARY KEY (`alias`);
+
+--
+-- Индексы таблицы `UrlTarget`
+--
+ALTER TABLE `UrlTarget`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `target_UNIQUE` (`target`);
+
+--
+-- Индексы таблицы `Users`
+--
+ALTER TABLE `Users`
+  ADD PRIMARY KEY (`login`),
+  ADD UNIQUE KEY `login_UNIQUE` (`login`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD UNIQUE KEY `phone_UNIQUE` (`phone`),
+  ADD KEY `fk_Users_1_idx` (`group`);
+
+--
+-- Индексы таблицы `UsersAgreements`
+--
+ALTER TABLE `UsersAgreements`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD UNIQUE KEY `sequence_UNIQUE` (`sequence`);
+
+--
+-- Индексы таблицы `UsersGroups`
+--
+ALTER TABLE `UsersGroups`
+  ADD PRIMARY KEY (`group`),
+  ADD UNIQUE KEY `group_UNIQUE` (`group`);
+
+--
+-- Индексы таблицы `UsersGroups_Lang`
+--
+ALTER TABLE `UsersGroups_Lang`
+  ADD PRIMARY KEY (`group`,`lang`),
+  ADD KEY `fk_UsersGroups_Lang_2_idx` (`lang`);
+
+--
+-- Индексы таблицы `UsersMassage`
+--
+ALTER TABLE `UsersMassage`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_UsersMassage_1_idx` (`sender`),
+  ADD KEY `fk_UsersMassage_2_idx` (`addressee`);
+
+--
+-- Индексы таблицы `UsersNotifications`
+--
+ALTER TABLE `UsersNotifications`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `fk_UsersNotifications_1_idx` (`type`),
+  ADD KEY `fk_UsersNotifications_2_idx` (`user`);
+
+--
+-- Индексы таблицы `UsersNotificationsType`
+--
+ALTER TABLE `UsersNotificationsType`
+  ADD PRIMARY KEY (`type`),
+  ADD UNIQUE KEY `type_UNIQUE` (`type`);
+
+--
+-- Индексы таблицы `UsersNotifications_Lang`
+--
+ALTER TABLE `UsersNotifications_Lang`
+  ADD PRIMARY KEY (`usersNotifications`,`lang`),
+  ADD UNIQUE KEY `lang_UNIQUE` (`lang`,`usersNotifications`);
+
+--
+-- Индексы таблицы `UsersOnlineApplications`
+--
+ALTER TABLE `UsersOnlineApplications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_UsersOnlineApplications_1_idx` (`totalStatus`);
+
+--
+-- Индексы таблицы `UsersOnlineApplicationsLogStatusTransition`
+--
+ALTER TABLE `UsersOnlineApplicationsLogStatusTransition`
+  ADD PRIMARY KEY (`onlineApplication`,`changed`),
+  ADD KEY `fk_UsersOnlineApplicationsLogStatusTransition_2_idx` (`startStatus`),
+  ADD KEY `fk_UsersOnlineApplicationsLogStatusTransition_3_idx` (`endStatus`);
+
+--
+-- Индексы таблицы `UsersOnlineApplicationsStatuses`
+--
+ALTER TABLE `UsersOnlineApplicationsStatuses`
+  ADD PRIMARY KEY (`status`);
+
+--
+-- Индексы таблицы `UsersOnlineApplicationsStatuseTransition`
+--
+ALTER TABLE `UsersOnlineApplicationsStatuseTransition`
+  ADD PRIMARY KEY (`startStatus`,`endStatus`),
+  ADD KEY `fk_UsersOnlineApplicationsStatuseTransition_2_idx` (`endStatus`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `ComponentsDepends`
+--
+ALTER TABLE `ComponentsDepends`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `ComponentsElements`
+--
+ALTER TABLE `ComponentsElements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=999902;
+--
+-- AUTO_INCREMENT для таблицы `DBerrors`
+--
+ALTER TABLE `DBerrors`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `Feedbacks`
+--
+ALTER TABLE `Feedbacks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+--
+-- AUTO_INCREMENT для таблицы `MenuItems`
+--
+ALTER TABLE `MenuItems`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Идентификатор элемента меню', AUTO_INCREMENT=109;
+--
+-- AUTO_INCREMENT для таблицы `ModulesDepends`
+--
+ALTER TABLE `ModulesDepends`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `ModulesInBlocks`
+--
+ALTER TABLE `ModulesInBlocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=902103;
+--
+-- AUTO_INCREMENT для таблицы `ParamInfo_ComponentsElements`
+--
+ALTER TABLE `ParamInfo_ComponentsElements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT для таблицы `PluginDepends`
+--
+ALTER TABLE `PluginDepends`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `PluginOnPage`
+--
+ALTER TABLE `PluginOnPage`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `Plugins`
+--
+ALTER TABLE `Plugins`
+  MODIFY `sequence` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT для таблицы `PricesAdditionalServices`
+--
+ALTER TABLE `PricesAdditionalServices`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT для таблицы `PricesCourses`
+--
+ALTER TABLE `PricesCourses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT для таблицы `TemplateBlocks`
+--
+ALTER TABLE `TemplateBlocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=902;
+--
+-- AUTO_INCREMENT для таблицы `TemplateDependence`
+--
+ALTER TABLE `TemplateDependence`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `UrlTarget`
+--
+ALTER TABLE `UrlTarget`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `UsersAgreements`
+--
+ALTER TABLE `UsersAgreements`
+  MODIFY `sequence` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `UsersMassage`
+--
+ALTER TABLE `UsersMassage`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `UsersNotifications`
+--
+ALTER TABLE `UsersNotifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
@@ -2877,6 +3544,27 @@ ALTER TABLE `UsersNotifications`
 ALTER TABLE `UsersNotifications_Lang`
   ADD CONSTRAINT `fk_UsersNotifications_Lang_1` FOREIGN KEY (`usersNotifications`) REFERENCES `UsersNotifications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_UsersNotifications_Lang_2` FOREIGN KEY (`lang`) REFERENCES `Lang` (`lang`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `UsersOnlineApplications`
+--
+ALTER TABLE `UsersOnlineApplications`
+  ADD CONSTRAINT `fk_UsersOnlineApplications_1` FOREIGN KEY (`totalStatus`) REFERENCES `UsersOnlineApplicationsStatuses` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `UsersOnlineApplicationsLogStatusTransition`
+--
+ALTER TABLE `UsersOnlineApplicationsLogStatusTransition`
+  ADD CONSTRAINT `fk_UsersOnlineApplicationsLogStatusTransition_1` FOREIGN KEY (`onlineApplication`) REFERENCES `UsersOnlineApplications` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_UsersOnlineApplicationsLogStatusTransition_2` FOREIGN KEY (`startStatus`) REFERENCES `UsersOnlineApplicationsStatuses` (`status`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_UsersOnlineApplicationsLogStatusTransition_3` FOREIGN KEY (`endStatus`) REFERENCES `UsersOnlineApplicationsStatuses` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `UsersOnlineApplicationsStatuseTransition`
+--
+ALTER TABLE `UsersOnlineApplicationsStatuseTransition`
+  ADD CONSTRAINT `fk_UsersOnlineApplicationsStatuseTransition_1` FOREIGN KEY (`startStatus`) REFERENCES `UsersOnlineApplicationsStatuses` (`status`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_UsersOnlineApplicationsStatuseTransition_2` FOREIGN KEY (`endStatus`) REFERENCES `UsersOnlineApplicationsStatuses` (`status`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

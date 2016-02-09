@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09.02.2016, 14:50:19
+    Author     : Maxim Zaitsev
+*/
+
+.UsersOnlineApplicationsFormBlock {
+    width: 600px;
+}
+.UsersOnlineApplicationsFormBlock .UsersOnlineApplicationsForm {}
+.UsersOnlineApplicationsFormBlock .UsersOnlineApplicationsForm .FormTable_Text .text {
+    font: 12px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-align: right;
+    padding: 0px 10px;
+}
+
+.UsersOnlineApplicationsFormBlock .UsersOnlineApplicationsForm input[type="text"] {
+    width: 400px;
+}
+.UsersOnlineApplicationsFormBlock .UsersOnlineApplicationsForm textarea {
+    width: 400px;
+    min-width: 400px;
+    max-width: 400px;
+    height: 50px;
+}
+
+.UsersOnlineApplicationsFormText {
+    font: bold 32px/50px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+    color: #ef7f1a;
+    text-align: center;
+}
+
+.UsersOnlineApplicationsFormShowButton {
+    margin-right: 50px;
+    width: 150px;
+    height: 150px;
+    background: url('../img/callback.png') center center no-repeat;
+}
+    
