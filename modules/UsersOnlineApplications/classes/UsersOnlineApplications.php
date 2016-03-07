@@ -81,6 +81,8 @@ class UsersOnlineApplications {
     private function jsAlert($text) {
         $out = "<script type='text/javascript'>";
         $out .= "alert('".$text."');";
+        $urlHelper = new UrlHelper();
+        $out .= 'window.location.href = "'.$urlHelper->getThisPage().'"';
         $out .= "</script>";
         return $out;
     }

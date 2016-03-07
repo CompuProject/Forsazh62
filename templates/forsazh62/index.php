@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/DrivingSchoolPersonnel.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/ContactsUI.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/Other.css" type="text/css" />
+    <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/UOAManagerPanelApplications.css" type="text/css" />
+    <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/UOAManagerPanelShowApplication.css" type="text/css" />
     <!--<link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/newYear.css" type="text/css" />-->
+    <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/8marta.css" type="text/css" />
 </head>
 <body>
     <?php $ROOT->bodyStart();?>

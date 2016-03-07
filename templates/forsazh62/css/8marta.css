@@ -1,0 +1,21 @@
+body {
+    background: #FFFFFF url('../img/8marta.jpg') top center no-repeat;
+}
+body .RootWrapper .TopPanelWrapper .TopPanelBlock .MainMenuWrapper {
+	/* background: rgba(0,0,0,.4); */
+}
+
+.horizontal_1_lvl.MainMenu li a {
+	color: #cccccc;
+	color: #FFFFFF;
+	text-shadow: 0px 0px 10px #000000, 0px 0px 5px #000000;
+}
+
+body .HeadInfoBlock .m_block.HeadContacts .HeadPhone, .HeadInfoBlock .m_block.HeadContacts .HeadPhone,
+body .HeadInfoBlock .m_block.HeadContacts .HeadPhone, .HeadInfoBlock .m_block.HeadContacts .HeadMail {
+	color: #FFFFFF;
+	text-shadow: 0px 0px 10px #000000;
+}
+body .RootWrapper .TopPanelWrapper .TopPanelBlock .TopPanelRightWrapper .TopPanelRightBlock .TitleWrapper .TitleBlock h1 {
+	text-shadow: 0px 0px 10px #000000;
+}

@@ -113,7 +113,7 @@ class InputHelper {
      * @param type $value
      * @return string
      */
-    public static function textBox($name,$id,$class,$maxlength,$mandatory,$value,$JSevents=null) {
+    public static function textBox($name,$id,$class,$maxlength,$mandatory,$value,$JSevents=null, $placeholder='') {
         if($mandatory) {
             $required = " required ";
         } else {
@@ -123,7 +123,7 @@ class InputHelper {
             $JSevents="";
         }
         $out = '<input type="text" class="'.$class.'" name="'.$name.'" value="'.
-                $value.'" id="'.$id.'" maxlength="'.$maxlength.'" '.
+                $value.'" id="'.$id.'" maxlength="'.$maxlength.'" "placeholder="'.$placeholder.'" '.
                 $required.' '.$JSevents.' autocomplete="off" />';
         return $out;
     }

@@ -343,3 +343,6 @@
     .HeadInfoBlock .m_block {
         float: right;
     }
+    .MainMenuBlock .m_block {
+        float: right;
+    }

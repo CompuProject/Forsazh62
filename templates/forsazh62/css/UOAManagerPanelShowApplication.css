@@ -1,0 +1,108 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07.03.2016, 14:00:38
+    Author     : Maxim Zaitsev
+*/
+
+
+.UOAManagerPanelUserApplication {
+    padding: 0px 20px;
+}
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationTable td {
+    text-transform: uppercase;
+}
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationLogTable th {
+    font: bold 10px/14px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+}
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationLogTable td {
+    font: 10px/14px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    /*text-transform: uppercase;*/
+}
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationTable caption,
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationLogTable caption {
+    font: bold 14px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+}
+.UOAManagerPanelUserApplication .UOAManagerPanelUserApplicationTable caption span.status {
+    color: #a13415;
+}
+
+.UserApplicationnStatuseTransitionPanel {
+    margin-bottom: 10px;
+}
+.UserApplicationnStatuseTransitionPanel .UserApplicationnStatuseTransitionPanelTitle {
+    text-align: center;
+    font: bold 14px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+}
+.UserApplicationnStatuseTransitionPanel .UserApplicationnStatuseTransitionPanelNoDatae {
+    text-align: center;
+    font: 12px/14px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+}
+.UserApplicationnStatuseTransitionPanel .UserApplicationnStatuseTransitionPanelButton {
+    margin: 5px 5px 0px 0px;
+    float: left;
+}
+.UserApplicationnStatuseTransitionPanel .UserApplicationnStatuseTransitionPanelButton a {
+    display: block;
+    background: #EDEDED;
+    font: 12px/12px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #5f5f5f;
+    padding: 10px;
+}
+.UserApplicationnStatuseTransitionPanel .UserApplicationnStatuseTransitionPanelButton a:hover {
+    background: #A7A7A7;
+    color: #FFFFFF;
+}
+
+
+.UOAManagerPanelTransitionStatusApplication {
+    padding: 0px 20px;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationError {
+    text-align: center;
+    font: bold 14px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+    color: #a13415;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock {}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock .TransitionStatusApplicationMessage {
+    text-align: center;
+    font: bold 14px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock .TransitionStatusApplicationFormComments {
+    width: 900px;
+    max-width: 900px;
+    min-width: 900px;
+    height: 100px;
+    min-height: 100px;
+    max-height: 300px;
+}
+
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock input[type=submit].TransitionStatusApplicationFormButton {
+/*    display: block;
+    margin: 0px auto;*/
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock input[type=submit].TransitionStatusApplicationFormButton.Yes {
+    background: #23A923;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock input[type=submit].TransitionStatusApplicationFormButton.Yes:hover {
+    background: #1B8C1B;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock input[type=button].TransitionStatusApplicationFormButton.No {
+    background: #CE421A;
+}
+.UOAManagerPanelTransitionStatusApplication .TransitionStatusApplicationFormBlock input[type=button].TransitionStatusApplicationFormButton.No:hover {
+    background: #a13415;
+}
+
+input[type=button].UOAManagerPanelUserApplicationBackButton {
+    display: block;
+    margin: 0 auto;
+}

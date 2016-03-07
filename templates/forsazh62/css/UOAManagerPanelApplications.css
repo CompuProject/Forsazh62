@@ -1,0 +1,177 @@
+
+
+.UOAManagerPanelApplicationsList {
+    padding: 10px 20px 10px 20px;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement {
+    margin-bottom: 20px;
+    background: #F8F8F8;
+    border-bottom: 5px solid #EDEDED;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead {
+    font: bold 14px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    background: #EDEDED;
+    height: 30px;
+    /*padding: 5px;*/
+}
+
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.created .UOAelementStatusColor {background: #a13415; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.callBack .UOAelementStatusColor {background: #E55004; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.notAvailable .UOAelementStatusColor {background: #E55004; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.talked .UOAelementStatusColor {background: #F7A603; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.denied .UOAelementStatusColor {background: #A7A7A7; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.refused .UOAelementStatusColor {background: #A7A7A7; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.makeTheContract .UOAelementStatusColor {background: #007fd1; color: #FFFFFF;}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement.pay .UOAelementStatusColor {background: #23A923; color: #FFFFFF;}
+
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementStatusColor {
+    height: 30px;
+    width: 5px;
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementStatus {
+    font: bold 12px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    padding: 5px;
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementID {
+    padding: 5px;
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementShowButton {
+    float: right;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementShowButton a {
+    font: bold 10px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    text-transform: uppercase;
+    display: block;
+    width: 130px;
+    height: 20px;
+    padding: 5px;
+    background: #CDCDCD;
+    color: #FFFFFF;
+    cursor: pointer;
+    text-align: center;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementHead .UOAelementShowButton a:hover {
+    background: #A7A7A7;
+}
+
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody {
+    width: 360px;
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody .UOAelementPersonal {
+    font: bold 12px/30px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    padding: 0px 5px 0px 5px;
+    height: 30px;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody  .UOAelementPersonal .UOAelementFio {
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody  .UOAelementPersonal .UOAelementPhone {
+    float: right;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody  .UOAelementDatetime {
+    font: 11px/20px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    padding: 0px 5px 0px 5px;
+    height: 20px;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody  .UOAelementDatetime .UOAelementCreation {
+    float: left;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementBody  .UOAelementDatetime .UOAelementChanged {
+    float: right;
+}
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementMessage {
+    font: 10px/12px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+    width: 545px;
+    height: 50px;
+    padding: 0px 5px 5px 5px;
+    float: right;
+    text-align: center;
+    border-left: 5px solid #EDEDED;
+    
+}
+
+.UOAManagerPanelApplicationsList .UOAManagerPanelApplicationsListElement .UOAelementMessage div {
+    height: 50px;
+    width: 550px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #A7A7A7;
+}
+
+
+.UOAManagerPanelApplicationsListFilters {
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersFerstLine .UOAFilterBlockValues {
+    float: left;
+    width: 293px;
+    /*background: #23A923;*/
+    padding-left: 20px;
+}
+
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersFerstLine .UOAFilterBlockValues .UOAFilterBlockName {
+    width: 293px;
+    text-align: center;
+    font: 10px/12px 'Roboto', "PT Sans", helvetica, "segoe UI", arial, sans-serif;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersFerstLine .UOAFilterBlockValues input[type=text] {
+    width: 273px;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues {
+    padding: 0px 20px;
+}
+
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect {
+    position: absolute;
+    visibility: hidden;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font: 11px/11px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    color: #5f5f5f;
+    background: #EDEDED;
+    margin: 5px 5px 0px 0px;
+    padding: 5px;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    -o-transition: background 0.5s;
+    transition: background 0.5s;
+    float: left;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect:checked+label {
+    padding-left: 5px;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect:checked+label {
+  background-color: #ef7f1a;
+  color: #fff;
+}
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect:checked+label:before {
+    content: '\2713';
+    padding-right: 5px;
+}
+
+.UOAManagerPanelApplicationsListFilters .UOAManagerPanelApplicationsListFiltersSecondLine .UOAFilterBlockValues input.FilterTypeGroupSelect+label:before {
+    content: '\2715';
+    padding-right: 5px;
+}
+
+.UOAManagerPanelApplicationsListFilters .UOAFilterBlockListSort {
+    float: right;
+    padding: 5px 20px;
+    font: 11px/11px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+}
+.UOAManagerPanelApplicationsListFilters .UOAFilterBlockListSort .selectBox {
+    margin-left: 5px;
+}
