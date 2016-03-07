@@ -25,6 +25,7 @@ input[type=submit].AuthorizationFormButton {
 }
 input[type=submit].AuthorizationFormButton:hover {
     box-shadow: none;
+    background: rgba(255,255,255,.5) url('../img/in.png') center center no-repeat;
 }
 
 .LoginPanelBlock {
@@ -32,6 +33,7 @@ input[type=submit].AuthorizationFormButton:hover {
     width: 60px;
     float: left;
     border-right: rgba(255,255,255,0.4) 1px solid;
+    position: relative;
 }
 .RegButon {
     height: 30px;
@@ -90,6 +92,10 @@ input[type=submit].AuthorizationFormButton:hover {
     display: none;
     border: 1px rgba(255,255,255,0.5) solid;
     border-top: none;
+    /*position: absolute;*/
+/*    bottom: 0px;
+    left: 0px;*/
+    z-index: 900;
 }
 
 .LoginPanelBlock.active .LoginPanel{
