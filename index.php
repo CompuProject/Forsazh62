@@ -1,10 +1,8 @@
 <?php
-//ini_set("memory_limit", "1024M");
-//ini_set('max_execution_time', 5000);
 @session_start();
 // Включить отображение ошибок
-ini_set("display_errors",1);
-error_reporting(E_ALL);
+//ini_set("display_errors",1);
+//error_reporting(E_ALL);
 // Подключение библиотек ядра
 include_once './ROOT/functions/includeSistemClasses.php';
 includeSistemClasses();

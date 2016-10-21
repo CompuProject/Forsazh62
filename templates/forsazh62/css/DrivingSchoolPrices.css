@@ -7,8 +7,33 @@
 .AdditionalServicesBlock .AdditionalServicesTitle {
     text-align: center;
 }
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryName {
+    height: 50px;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryName div{
+    float: left;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryName a.fancybox-doc {
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: left;
+    margin: 10px;
+    background: url('../img/info_icon.png') no-repeat top center;
+}
+.CoursesCategoryBlocks .CoursesCategoryBlock .CategoryName a.fancybox-doc:hover {
+    background: url('../img/info_icon.png') no-repeat bottom center;
+}
 .CoursesCategoryBlocks .CoursesCategoryBlock .CategoryDescription {
     text-align: justify;
+    display: none;
+}
+.doc_div.CategoryDescription {
+    width: 800px;
+}
+.doc_div.CategoryDescription p {
+    font: 14px/20px "PT Sans",helvetica,"segoe UI",arial,sans-serif;
+    margin-bottom: 10px;
 }
 .CoursesCategoryBlocks .CoursesCategoryBlock .CategoryPrice {}
 .CoursesCategoryBlocks table td.сours {
@@ -29,4 +54,29 @@
 }
 .AdditionalServicesBlock table td.cost {
     width: 200px;
+}
+
+.DrivingSchoolPricesTabNameWrapper {
+    height: 40px;
+    padding: 20px 0 0 50px;
+}
+.DrivingSchoolPricesTabNameWrapper .DrivingSchoolPricesTabName {
+    color: #8184a1;
+    text-decoration: none;
+    line-height: 27px;
+    border: 1px solid #dee0ee;
+    background: none;
+    float: left;
+    padding: 0 10px;
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+}
+.DrivingSchoolPricesTabNameWrapper .DrivingSchoolPricesTabName.current {
+    background: #ef7f1a !important;
+    border: 1px solid #ef7f1a !important;
+    color: #fff;
+}
+
+.DrivingSchoolPricesTabAreaWrapper .DrivingSchoolPricesTabBlock:not(:first-child) {
+    display: none;
 }

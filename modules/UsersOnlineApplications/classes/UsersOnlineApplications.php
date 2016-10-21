@@ -41,6 +41,8 @@ class UsersOnlineApplications {
         $this->form .= InputHelper::createFormRow($phone, true, 'Контактный номер');
         $message = InputHelper::textarea('message', 'message', 'message', 50000, false, null);
         $this->form .= InputHelper::createFormRow($message, false, 'Дополнительная информация');
+        $captcha = InputHelper::textBox("captcha", "captcha", "captcha", 20, true, null);
+		$this->form .= InputHelper::createFormRow($captcha, true, getCaptcha(120, 25));
         $this->form .= '</table>';
         $this->form .= '<center>';
         $this->form .= '<input class="UsersOnlineApplicationsFormSubmit" type="submit" name="UsersOnlineApplicationsFormSubmit" value="Перезвоните мне">';
@@ -62,11 +64,27 @@ class UsersOnlineApplications {
         $this->UI .= '</div>';
         $this->UI .= '</div>';
     }
+	
+	/**
+     * Проверка каптчи
+     * @return type - вернет true если проверка удачная
+     */
+    private function checkCaptcha() {
+        @session_start();
+        return (
+                isset($_SESSION['captcha']) && 
+                strtoupper($_SESSION['captcha']) == strtoupper($_POST['captcha'])
+        );
+    }
     
     private function execute() {
         if (InputValueHelper::getPostValue('UsersOnlineApplicationsFormSubmit') != null) {
-            $this->addNewApplications();
-            echo $this->jsAlert("Спасибо за обращение, наши менеджеры свяжутся с вами.");
+			if($this->checkCaptcha()) {
+				$this->addNewApplications();
+				echo $this->jsAlert("Спасибо за обращение, наши менеджеры свяжутся с вами.");
+			} else {
+				echo $this->jsAlert("Вы ввели не верный проверочный код.");
+			}
         }
     }
     private function addNewApplications() {

@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/UOAManagerPanelApplications.css" type="text/css" />
     <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/UOAManagerPanelShowApplication.css" type="text/css" />
     <!--<link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/newYear.css" type="text/css" />-->
-    <link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/8marta.css" type="text/css" />
+    <!--<link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/8marta.css" type="text/css" />-->
+    <!--<link rel="stylesheet" href="<?php $ROOT->templatePath();?>css/9maja.css" type="text/css" />-->
 </head>
 <body>
     <?php $ROOT->bodyStart();?>
@@ -73,7 +74,7 @@
             <div class="clear"></div>
         </div>
         <div class="PoweredByWrapper">
-            <div class="PoweredByBlock FixWidthBlockMain">Powered By CompuProject © 2011-2015</div>
+            <div class="PoweredByBlock FixWidthBlockMain">Powered By CompuProject © 2011-2016</div>
         </div>
     </div>
     
