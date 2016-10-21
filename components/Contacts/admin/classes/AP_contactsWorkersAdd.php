@@ -1,5 +1,5 @@
 <?php
-class AP_сontactsWorkersAdd extends AdminPanel_ComponentPanelUI_Element_Add {
+class AP_contactsWorkersAdd extends AdminPanel_ComponentPanelUI_Element_Add {
     
     protected function getElementID() {
         return $this->insertValue['alias'];

@@ -1,5 +1,5 @@
 <?php
-class AP_сontactsWorkersMain extends AdminPanel_ComponentPanelUI_Element {
+class AP_contactsWorkersMain extends AdminPanel_ComponentPanelUI_Element {
     
     protected function getData() {
         parent::getData();
@@ -33,25 +33,25 @@ class AP_сontactsWorkersMain extends AdminPanel_ComponentPanelUI_Element {
     
     protected function generateAddUI() {
         parent::generateAddUI();
-        $ap_contactsWorkersAdd = new AP_сontactsWorkersAdd();
+        $ap_contactsWorkersAdd = new AP_contactsWorkersAdd();
         $this->html = $ap_contactsWorkersAdd->getForm();
     }
    
     protected function generateEditUI() {
         parent::generateAddUI();
-        $ap_contactsWorkersEdit = new AP_сontactsWorkersEdit($this->URL_PARAMS[5]);
+        $ap_contactsWorkersEdit = new AP_contactsWorkersEdit($this->URL_PARAMS[5]);
         $this->html = $ap_contactsWorkersEdit->getForm();
     }
     
     protected function generateDeleteYesUI() {
         parent::generateDeleteYesUI();
-        $ap_contactsWorkersDelete = new AP_сontactsWorkersDelete($this->URL_PARAMS[5]);
+        $ap_contactsWorkersDelete = new AP_contactsWorkersDelete($this->URL_PARAMS[5]);
         $this->html = $ap_contactsWorkersDelete->delete(true);
     }
     
     protected function generateDeleteNoUI() {
         parent::generateDeleteNoUI();
-        $ap_contactsWorkersDelete = new AP_сontactsWorkersDelete($this->URL_PARAMS[5]);
+        $ap_contactsWorkersDelete = new AP_contactsWorkersDelete($this->URL_PARAMS[5]);
         $this->html = $ap_contactsWorkersDelete->delete(false);
     }
    

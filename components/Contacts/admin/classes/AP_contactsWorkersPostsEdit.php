@@ -1,5 +1,5 @@
 <?php
-class AP_сontactsWorkersPostsEdit extends AdminPanel_ComponentPanelUI_Element_Edit {
+class AP_contactsWorkersPostsEdit extends AdminPanel_ComponentPanelUI_Element_Edit {
     
     private $postLang;
     

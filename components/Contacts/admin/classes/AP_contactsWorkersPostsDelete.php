@@ -1,5 +1,5 @@
 <?php
-class AP_сontactsWorkersPostsDelete extends AdminPanel_ComponentPanelUI_Element_Delete {
+class AP_contactsWorkersPostsDelete extends AdminPanel_ComponentPanelUI_Element_Delete {
     
     protected function setDeleteQuery() {
         $this->deleteQuery = "DELETE FROM `ContactsWorkersPosts` WHERE `post`='".$this->alias."';";
