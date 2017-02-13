@@ -1,8 +1,8 @@
 <?php
 @session_start();
 // Включить отображение ошибок
-//ini_set("display_errors",1);
-//error_reporting(E_ALL);
+ini_set("display_errors",1);
+error_reporting(E_ALL);
 // Подключение библиотек ядра
 include_once './ROOT/functions/includeSistemClasses.php';
 includeSistemClasses();
