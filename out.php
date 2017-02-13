@@ -6,4 +6,3 @@ if(isset($_GET['backURL'])) {
 } else {
     header('Location: ./');
 }
-?>
